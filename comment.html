@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="njquery.js"></script> 
+
+<link rel="stylesheet" href="nbootstrap.css">
+
+<script src="nbootstrap.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+
+button.panbtn:focus,button.panbtn
+
+{
+
+outline: none !important;
+
+// box-shadow: none;
+
+background-color: transparent !important;
+
+border-style: none !important;
+
+cursor: pointer;
+
+}
+
+#lname {
+
+width: 94%;
+
+padding: 12px 20px;
+
+margin: 8px 0;
+
+display: inline-block;
+
+border: 1px solid #ccc;
+
+border-radius: 6px;
+
+box-sizing: border-box;
+
+}
+
+#lname:focus { 
+
+outline:none;
+
+border-color:#9ecaed;
+
+box-shadow:0 0 4px #9ecaed;
+
+}
+
+#submit{ 
+
+width: 70%;
+
+background-color: #4CAF50;
+
+color: white;
+
+padding: 14px 20px;
+
+margin: 8px 0;
+
+border: none;
+
+border-radius: 6px;
+
+cursor: pointer;
+
+}
+
+#submit :hover {
+
+background-color: #45a049;
+
+}
+
+#submit:disabled {
+
+opacity: 0.5;
+
+cursor: not-allowed;
+
+// background: #dddddd;
+
+}
+
+#fdiv {
+
+border-radius: 5px;
+
+background-color: #ffffff;
+
+padding: 15px;
+
+border: 1px solid #ccc;
+
+}
+
+#ftextarea {
+
+// font-family: "Times New Roman", Times, serif;
+
+width: 94%;
+
+font-family:fontawesome;
+
+height: 200px;
+
+padding: 10px 13px;
+
+display: inline-block;
+
+box-sizing: border-box;
+
+border: 1px solid #ccc;
+
+border-radius: 6px;
+
+background-color: #ffffff;
+
+font-size: 14px;
+
+resize: vertical;
+
+}
+
+#ftextarea:focus { 
+
+outline:none;
+
+border-color:#9ecaed;
+
+box-shadow:0 0 4px #9ecaed;
+
+}
+
+div.panel-heading{
+
+padding: 10px;
+
+font-size: 12px;
+
+}
+
+.panel-body{
+
+overflow: auto;
+
+margin-left :2px;
+
+padding: 15px;
+
+}
+
+.panbtn{
+
+overflow: auto;
+
+transform: translateY(-14%);
+
+margin-left: 2px;
+
+}
+
+</style>
+
+</head>
+
+<body onload="read_tab()">
+
+<ul class="nav nav-tabs">
+
+<li class="active"><a id="Textcolor" data-toggle="tab" rel="tooltip" data-original-title='Home' href="#sectionA"><i id="homeicon" class="fa fa-lg fa-home"></i></a></li>
+
+<li><a id="Textcolor2" data-toggle="tab" rel="tooltip" data-original-title='Profile' href="#sectionB"><i id="profileicon" class="fa fa-lg fa-user"></i></a></li>
+
+<li><a id="Messages" data-toggle="tab" rel="tooltip" data-original-title='Messages' href="#"><i id="messageicon" class="fa fa-lg fa-envelope"></i></a></li>
+
+<li><a id="Notifications" data-toggle="tab" rel="tooltip" data-original-title='Notifications' href="#sectionA"><i id="bellicon" class="fa fa-lg fa-bell"></i></a></li>
+
+<li><a id="Gameification" data-toggle="tab" rel="tooltip" data-original-title='Gameification' href="#"><i id="gameicon" class="fa fa-lg fa-gamepad"></i></a></li>
+
+</ul> <!-- onload="read_tab()"> -->
+
+<form align="center" id="gform" target="_self" method="POST" >
+
+<input type="text" id="lname" autocomplete="off" name="entry.1370517133" placeholder="Custom tag..">
+
+<textarea id="ftextarea" rows="8" cols="33" autocomplete="off" name="entry.1750301637" placeholder="Write here.." required></textarea>
+
+<input type="hidden" id="tnd" name="entry.1348818570">
+
+<input id="submit" type="submit" value="Submit" >
+
+</form>
+
+<br> 
+
+<div class="container"> 
+
+<div class="panel panel-info">
+
+<div class="panel-heading">Panel geafung
+
+<button class="pull-right dotbtn panbtn btn btn-sm btn-primary"><i style="color: black; font-size:12px;" class=" fa fa-ellipsis-h"></i></button>
+
+<button class="pull-right copybtn panbtn btn btn-sm btn-primary"><i style="color: black; font-size:12px;" class=" fa fa-clone"></i></button>
+
+<button class="pull-right togbtn clickable panbtn btn btn-sm btn-primary"style="box-shadow: none;"><i style="color: black; font-size:12px;" class=" fa fa-chevron-circle-up"></i></button> 
+
+</div>
+
+<div id="p2d" class="panel-body">Panel DiscussesAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. </div>
+
+</div>
+
+<div class="panel panel-success">
+
+<div class="panel-heading">Panel geafung
+
+<button class="pull-right dotbtn "><i style="color: black; font-size:12px;" class=" fa fa-ellipsis-h"></i></button>
+
+<button class="pull-right copybtn "><i style="color: black; font-size:12px;" class=" fa fa-clone"></i></button>
+
+<button class="pull-right togbtn clickable "><i style="color: black; font-size:12px;" class=" fa fa-chevron-circle-up"></i></button> 
+
+</div>
+
+<div id="pg2d" class="panel-body">Pbhvjhjjjanel DiscussesAnim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. </div>
+
+</div>
+
+<!-- Tooltip content -->
+
+<div id="my-tip" class="tip-content hidden ">
+
+<!--
+
+<button class="pull-right clickable pantbtn btn btn-sm btn-primary" style="transform: translateY(-13%);"><i style="color: white; font-size:20px;" class=" fa fa-chevron-circle-up"></i></button>
+
+<i class=" tipclickable fa fa-chevron-circle-up" style="font-size:20px;" ></i> 
+
+-->
+
+<div class="btn-group">
+
+<button class="pull-right tipclickable pantbtn btn btn-sm btn-primary" style="transform: translateY(-13%);"><i style="color: white; font-size:10px;" class=" fa fa-chevron-circle-up"></i></button>
+
+<button class="pull-right tipclickable pantbtn btn btn-sm btn-primary" style="transform: translateY(-13%);"><i style="color: white; font-size:10px;" class=" fa fa-chevron-circle-up"></i></button>
+
+<button class="pull-right tipclickable pantbtn btn btn-sm btn-primary" style="transform: translateY(-13%);"><i style="color: white; font-size:10px;" class=" fa fa-chevron-circle-up"></i></button> </div>
+
+</div>
+
+<div id="dynamicInput">
+
+Loading..
+
+</div>
+
+</div>
+
+<script>
+
+$(document).on('click', '.panel-heading button.clickable', function(e){
+
+var $this = $(this);
+
+if(!$this.hasClass('panel-collapsed')) {
+
+$this.parents('.panel').find('.panel-body').slideUp();
+
+$this.addClass('panel-collapsed');
+
+$this.find('i').removeClass('fa fa-chevron-circle-up').addClass('fa fa-chevron-circle-down');
+
+} else {
+
+$this.parents('.panel').find('.panel-body').slideDown();
+
+$this.removeClass('panel-collapsed');
+
+$this.find('i').removeClass('fa fa-chevron-circle-down').addClass('fa fa-chevron-circle-up');
+
+}
+
+})
+
+$(document).on('click', '.copybtn', function(e){
+
+var id = $(this).parents('.panel').find('.panel-body').attr('id');
+
+var el = document.getElementById(id);
+
+var range = document.createRange();
+
+range.selectNodeContents(el);
+
+var sel = window.getSelection();
+
+sel.removeAllRanges();
+
+sel.addRange(range);
+
+document.execCommand('copy');
+
+if (window.getSelection) {
+
+if (window.getSelection().empty) { // Chrome
+
+window.getSelection().empty();
+
+} else if (window.getSelection().removeAllRanges) { // Firefox
+
+window.getSelection().removeAllRanges();
+
+}
+
+} else if (document.selection) { // IE?
+
+document.selection.empty();
+
+}
+
+// alert("Contents copied to clipboard.");
+
+var $thisii = $(this).find('i');
+
+$thisii.css({
+
+"color": "blue",
+
+});
+
+setTimeout(function() {
+
+$thisii.css({
+
+"color": "black",
+
+});
+
+}, 500); 
+
+});
+
+/* 
+
+$(document).on('click', '.copybtn', function(e){
+
+var $this = $(this);
+
+var element = "#"+$this.parents('.panel').find('.panel-body').attr('id');
+
+var $temp = $("<input>");
+
+$("body").append($temp);
+
+$temp.val($(element).text()).select();
+
+document.execCommand("copy");
+
+$temp.remove(); 
+
+var $thisii = $this.find('i');
+
+$thisii.css({
+
+"color": "blue",
+
+});
+
+setTimeout(function() {
+
+$thisii.css({
+
+"color": "black",
+
+});
+
+}, 500); 
+
+})
+
+*/
+
+$(document).on('click', '.dotbtn', function(e){
+
+// $('.togbtn').toggle(); // showhide
+
+// $('.copybtn').toggle();
+
+var $this = $(this);
+
+$this.parents('.panel').find('.copybtn,.togbtn').toggle();
+
+})
+
+</script>
+
+<script type="text/javascript">
+
+// gascrud nd contacts sp
+
+var script_url = "https://script.google.com/macros/s/AKfycbxmEVmEt56-xiov1khpDGRJBW0PUWju147Wchm6lw/exec";
+
+var count=0;
+
+function read_tab() {
+
+var url = script_url+"?action=read";
+
+$.getJSON(url, function (json) { 
+
+var headingcounter = "";
+
+var collapsecounter = "";
+
+count = json.records.length;
+
+var list = document.getElementById("dynamicInput");
+
+for(var j=0; j< count; j++) 
+
+{
+
+headingcounter = "h"+j;
+
+collapsecounter = "c"+j;
+
+var newdiv = document.createElement('div');
+
+newdiv.innerHTML = '<div class="panel panel-default">' +
+
+'<div id='+headingcounter+' class="mypanel panel-heading"></div>' +
+
+'<div id='+j+' class="panel-body panel-collapse collapse in"></div></div>';
+
+// list.appendChild(newdiv);
+
+list.insertBefore(newdiv, list.childNodes[0]);
+
+document.getElementById(headingcounter).innerText = json.records[j].TND;
+
+document.getElementById(j).innerText = json.records[j].COMMENT;
+
+}
+
+$('.mypanel').append('<button class="pull-right panbtn dotbtn"><i style="color: black; font-size:12px;" class=" fa fa-ellipsis-h"></i></button><button class="pull-right panbtn copybtn"><i style="color: black; font-size:12px;" class=" fa fa-clone"></i></button><button class="pull-right panbtn togbtn clickable"><i style="color: black; font-size:12px;" class=" fa fa-chevron-circle-up"></i></button>');
+
+}); // $.getJSON
+
+} // read_tab
+
+function read_tab2() {
+
+var url = script_url+"?action=read";
+
+$.getJSON(url, function (json) { 
+
+var headingcounter = "";
+
+var collapsecounter = "";
+
+var list = document.getElementById("dynamicInput");
+
+var j=count++;
+
+headingcounter = "h"+j;
+
+collapsecounter = "c"+j;
+
+var newdiv = document.createElement('div');
+
+newdiv.innerHTML = '<div class="panel panel-default">' +
+
+'<div id='+headingcounter+' class="panel-heading"></div>' +
+
+'<div id='+j+' class="panel-body panel-collapse collapse in"></div></div>';
+
+// list.appendChild(newdiv);
+
+var tf = 1;
+
+setTimeout(function() {
+
+if(json.records[j].TND!=""){	list.insertBefore(newdiv, list.childNodes[0]);
+
+document.getElementById(headingcounter).innerText = json.records[j].TND;
+
+document.getElementById(j).innerText = json.records[j].COMMENT;
+
+// $('#headingcounter').append('<span class="pull-right clickable"><i class="fa fa-chevron-circle-up""></i></span>');
+
+var theDiv = document.getElementById(headingcounter);
+
+theDiv.innerHTML += '<button class="pull-right panbtn dotbtn"><i style="color: black; font-size:12px;" class=" fa fa-ellipsis-h"></i></button><button class="pull-right panbtn copybtn"><i style="color: black; font-size:12px;" class=" fa fa-clone"></i></button><button class="pull-right panbtn togbtn clickable"><i style="color: black; font-size:12px;" class=" fa fa-chevron-circle-up"></i></button>'; 
+
+tf=0; 
+
+}
+
+if(tf){	
+
+setTimeout(function() {
+
+list.insertBefore(newdiv, list.childNodes[0]);
+
+document.getElementById(headingcounter).innerText = json.records[j].TND;
+
+document.getElementById(j).innerText = json.records[j].COMMENT;
+
+var theDiv = document.getElementById(headingcounter);
+
+theDiv.innerHTML += '<button class="pull-right panbtn dotbtn"><i style="color: black; font-size:12px;" class=" fa fa-ellipsis-h"></i></button><button class="pull-right panbtn copybtn"><i style="color: black; font-size:12px;" class=" fa fa-clone"></i></button><button class="pull-right panbtn togbtn clickable"><i style="color: black; font-size:12px;" class=" fa fa-chevron-circle-up"></i></button>'; 
+
+}, 2000); 
+
+}
+
+}, 1000); 
+
+});
+
+}
+
+$('#gform').submit( function (event) { 
+
+var ln = document.getElementById('lname');
+
+if (ln.value.length == 0 ) 
+
+document.getElementById('lname').value='DEFAULT';
+
+var date=new Date();
+
+var currentDate= 'on '+date.toLocaleDateString()+' at '+date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second:'numeric', hour12: true });
+
+document.getElementById('tnd').value=currentDate;
+
+var formdata = $(this).serialize();
+
+event.preventDefault();
+
+$.ajax({
+
+type: "POST",
+
+url: "https://docs.google.com/forms/d/e/1FAIpQLSdwEc4XA1vSiqxA0UqcUfuPAM0cvZI_Dd7O4JoQlCd8rlYgEw/formResponse",
+
+data: formdata,
+
+});
+
+document.getElementById('ftextarea').value='';
+
+document.getElementById('lname').value='';
+
+setTimeout(function() {
+
+read_tab2();
+
+}, 1000); 
+
+});
+
+</script> 
+
+</body>
+
+</html>
