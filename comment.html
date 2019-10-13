@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="njquery.js"></script>
+<link rel="stylesheet" href="nbootstrap.css">
+<script src="nbootstrap.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<style>
+button.panbtn:focus,
+button.panbtn {
+
+outline: none !important;
+
+// box-shadow: none;
+
+background-color: transparent !important;
+
+border-style: none !important;
+
+cursor: pointer;
+
+}
+
+#lname {
+
+width: 94%;
+
+padding: 12px 20px;
+
+margin: 8px 0;
+
+display: inline-block;
+
+border: 1px solid #ccc;
+
+border-radius: 6px;
+
+box-sizing: border-box;
+
+}
+
+#lname:focus {
+
+outline: none;
+
+border-color: #9ecaed;
+
+box-shadow: 0 0 4px #9ecaed;
+
+}
+
+#submit {
+
+width: 70%;
+
+background-color: #4CAF50;
+
+color: white;
+
+padding: 14px 20px;
+
+margin: 8px 0;
+
+border: none;
+
+border-radius: 6px;
+
+cursor: pointer;
+
+}
+
+#submit :hover {
+
+background-color: #45a049;
+
+}
+
+#submit:disabled {
+
+opacity: 0.5;
+
+cursor: not-allowed;
+
+// background: #dddddd;
+
+}
+
+#fdiv {
+
+border-radius: 5px;
+
+background-color: #ffffff;
+
+padding: 15px;
+
+border: 1px solid #ccc;
+
+}
+
+#ftextarea {
+
+// font-family: "Times New Roman", Times, serif;
+
+width: 94%;
+
+font-family: fontawesome;
+
+height: 200px;
+
+padding: 10px 13px;
+
+display: inline-block;
+
+box-sizing: border-box;
+
+border: 1px solid #ccc;
+
+border-radius: 6px;
+
+background-color: #ffffff;
+
+font-size: 14px;
+
+resize: vertical;
+
+}
+
+#ftextarea:focus {
+
+outline: none;
+
+border-color: #9ecaed;
+
+box-shadow: 0 0 4px #9ecaed;
+
+}
+
+div.panel-heading {
+
+padding: 10px;
+
+font-size: 12px;
+
+}
+
+.panel-body {
+
+overflow: auto;
+
+margin-left: 2px;
+
+padding: 15px;
+
+}
+
+.panbtn {
+
+overflow: auto;
+
+transform: translateY(-14%);
+
+margin-left: 2px;
+
+}
+</style>
+
+
+<body onload="read_tab()">
+<form align="center" id="gform" target="_self" method="POST" >
+<input type="text" id="lname" autocomplete="off" name="entry.1370517133" placeholder="Custom tag..">
+<textarea id="ftextarea" rows="8" cols="33" autocomplete="off" name="entry.1750301637" placeholder="Write here.." required ></textarea>
+<input type="hidden" id="tnd" name="entry.1348818570">
+<input id="submit" type="submit" value="Submit" >
+</form>
+<br>
+<div id="dynamicInput">
+<div>
+Loading..
+</div>
+</div>
+<script type="text/javascript">
+// gascrud nd contacts sp
+var script_url = "https://script.google.com/macros/s/AKfycbxmEVmEt56-xiov1khpDGRJBW0PUWju147Wchm6lw/exec";
+var count=0;
+function read_tab() {
+
+var url = script_url + "?action=read";
+
+$.getJSON(url, function (json) {
+
+var headingcounter = "";
+
+var collapsecounter = "";
+
+count = json.records.length;
+
+var list = document.getElementById("dynamicInput");
+
+for (var j = 0; j < count; j++) {
+
+headingcounter = "h" + j;
+
+collapsecounter = "c" + j;
+
+var newdiv = document.createElement('div');
+
+newdiv.innerHTML = '<div class="panel panel-default">' +
+
+'<div id=' + headingcounter + ' class="mypanel panel-heading"></div>' +
+
+'<div id=' + j + ' class="panel-body panel-collapse collapse in"></div></div>';
+
+// list.appendChild(newdiv);
+
+list.insertBefore(newdiv, list.childNodes[0]);
+
+document.getElementById(headingcounter).innerText = json.records[j].TND;
+
+document.getElementById(j).innerText = json.records[j].COMMENT;
+
+}
+
+$('.mypanel').append('<button class="pull-right copybtn panbtn btn btn-sm btn-primary"><i style="color: black; font-size:12px;" class=" fa fa-clone"></i></button>');
+
+}); // $.getJSON
+
+} // read_tab
+
+function read_tab2() {
+var url = script_url+"?action=read";
+$.getJSON(url, function (json) {
+var headingcounter = "";
+var collapsecounter = "";
+var list = document.getElementById("dynamicInput");
+
+var j=count++;
+
+headingcounter = "h"+j;
+collapsecounter = "c"+j;
+
+var newdiv = document.createElement('div');
+newdiv.innerHTML = '<div class="panel panel-info">' +
+
+'<div id=' + headingcounter + ' class="mypanel panel-heading"></div>' +
+
+'<div id=' + j + ' class="panel-body panel-collapse collapse in"></div></div>';
+
+// list.appendChild(newdiv);
+list.insertBefore(newdiv, list.childNodes[0]);
+document.getElementById(headingcounter).innerText = json.records[j].TND;
+document.getElementById(headingcounter).innerHTML += '<button class="pull-right copybtn panbtn btn btn-sm btn-primary"><i style="color: black; font-size:12px;" class=" fa fa-clone"></i></button>';
+document.getElementById(j).innerText = json.records[j].COMMENT;
+
+// $('#headingcounter').append('<button class="pull-right panbtn copybtn"><i style="color: black; font-size:12px;" class=" fa fa-clone"></i></button>');
+});
+}
+
+
+$(document).ready( function () {
+var field = $("#ftextarea");
+$("#ftextarea").on('input',function(){
+if (field[0].value.length > 0 ) {
+$('#submit').prop('disabled', false); }
+else {
+$('#submit').prop('disabled', true); }
+});
+$('#gform').submit( function (event) {
+
+var ln = document.getElementById('lname');
+if (ln.value.length == 0 )
+document.getElementById('lname').value='DEFAULT';
+
+var date=new Date();
+var currentDate= 'on '+date.toLocaleDateString()+' at '+date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second:'numeric', hour12: true });
+document.getElementById('tnd').value=currentDate;
+
+var formdata = $(this).serialize();
+event.preventDefault();
+$.ajax({
+type: "POST",
+url: "https://docs.google.com/forms/d/e/1FAIpQLSdwEc4XA1vSiqxA0UqcUfuPAM0cvZI_Dd7O4JoQlCd8rlYgEw/formResponse",
+data: formdata,
+timeout: 1000,
+complete: function() {
+read_tab2();
+
+//doe iets
+} //EINDE success
+});
+
+document.getElementById('ftextarea').value='';
+document.getElementById('lname').value='';
+// $('#submit').prop('disabled', true);
+
+/* timeout: 500,
+var delayInMilliseconds = 1000;
+setTimeout(function() {
+//add your code here to execute
+read_tab2();
+}, delayInMilliseconds);
+// return false;
+*/
+
+});
+});
+
+
+
+
+$(document).on('click', '.copybtn', function (e) {
+
+var id = $(this).parents('.panel').find('.panel-body').attr('id');
+
+var el = document.getElementById(id);
+
+var range = document.createRange();
+
+range.selectNodeContents(el);
+
+var sel = window.getSelection();
+
+sel.removeAllRanges();
+
+sel.addRange(range);
+
+document.execCommand('copy');
+
+if (window.getSelection) {
+
+if (window.getSelection().empty) { // Chrome
+
+window.getSelection().empty();
+
+} else if (window.getSelection().removeAllRanges) { // Firefox
+
+window.getSelection().removeAllRanges();
+
+}
+
+} else if (document.selection) { // IE?
+
+document.selection.empty();
+
+}
+
+// alert("Contents copied to clipboard.");
+
+var $thisii = $(this).find('i');
+
+$thisii.css({
+
+"color": "blue",
+
+});
+
+setTimeout(function () {
+
+$thisii.css({
+
+"color": "black",
+
+});
+
+}, 500);
+
+});
+</script>
+<!--
+<script type='text/javascript'>
+/* attach a submit handler to the form */
+$("#gform").submit(function(event) {
+
+/* stop form from submitting normally */
+event.preventDefault();
+
+/* get the action attribute from the <form action=""> element */
+var $form = $( this ),
+url = $form.attr( 'action' );
+
+/* Send the data using post with element id name and name2*/
+var posting = $.post( url, { name: $('#fname').val(), entry.1750301637: $('#lname').val() } );
+
+/* Alerts the results */
+posting.done(function( data ) {
+alert('success');
+});
+});
+</script>
+-->
+
+</body>
+</html>
