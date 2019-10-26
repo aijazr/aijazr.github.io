@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>fcfs</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.tdln {
+  border: solid 1px #FFF!important;
+  text-align: left;
+transform:translateX(-7px);
+}
+	
+
+
+table {
+    width: 550px;
+    table-layout: fixed;
+}
+
+
+.input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+td {
+  text-align: center;
+}
+
+.tdr {
+  text-align: right;
+}
+.tdl {
+  text-align: left;
+}
+#btn {
+	margin-top: 1%;
+	margin-left: 35%;
+  width: 30%;
+    box-sizing: border-box;
+}
+.ipbtn {
+	margin-top: 1%;
+  width: 30%;
+    box-sizing: border-box;
+}
+
+</style>
+</head>
+<body>
+	
+<h3>
+First Come First Serve (FCFS)  CPU Scheduling Algorithm 
+</h3>
+
+
+
+<input class="input"  type="number" id="nop" min="3" max="20" placeholder="Enter no. of processes (3 - 12)" autofocus>
+ <button id="btn" onclick="addinputs()">Submit</button> <br> 
+ 	<div style="color: red;display: none;margin-top:10px" id="ierr"> Please enter a number between 3-12</div>
+<form id="frm1" autocomplete="off" action="">
+	<br>
+	<table id="tab" style="width:100%">
+  <tr>
+    <th>Process Id</th>
+    <th>Arrival time</th> 
+    <th>Burst time</th>
+  </tr>
+  <tr>
+    <td>P1</td>
+    <td><input class="input" type="number" placeholder="     Enter P1 A.T" name="fname"  value="" ></td>
+    <td><input class="input"  type="number" placeholder="     Enter P1 B.T" name="fname" value=""></td>
+  </tr>
+  <tr>
+    <td>P2</td>
+    <td><input class="input"  type="number" placeholder="     Enter P2 A.T" name="fname" value=""></td>
+    <td><input class="input"  type="number" placeholder="     Enter P2 B.T" name="fname" value=""></td>
+  </tr>
+  <tr>
+    <td>P3</td>
+    <td><input class="input"  type="number" placeholder="     Enter P3 A.T"name="fname" value=""></td>
+    <td><input class="input"  type="number" placeholder="     Enter P3 B.T" name="fname" value=""></td>
+  </tr>
+</table> 
+<input style="margin-left: 17%" class="ipbtn"  type="button" onclick="myFunction()"  value="Solve">
+	<input class="ipbtn"  type="button" onclick="resetform();"  value="Reset">
+	
+</form> 
+<!-- <button onclick="myFunction()">solve</button> -->
+
+<p style="display: none" id="err">Please fill all the fields!</p>
+<p style="display: none" id="demo"></p>
+<br>
+	 <br>
+<div id="soln"></div>
+
+<br>
+		
+<table id="gctab" style="width:100%">
+  
+</table>
+<script>
+	
+	function resetform() {
+  document.getElementById("frm1").reset();
+		document.getElementById("err").style.display="none";
+
+}
+	
+	function addinputs(){
+		let nop  =document.getElementById("nop").value;
+		if(nop==""||nop<3|nop>12) {
+document.getElementById("ierr").style.display="block";
+ return false;  }
+ document.getElementById("err").style.display="none";
+ document.getElementById("ierr").style.display="none";
+            // Number of inputs to create
+            var number = document.getElementById("nop").value;
+            // Container <div> where dynamic content will be placed
+            var tab = document.getElementById("tab");
+   
+            var cd="<tr><th>Process Id</th>"
++"<th>Arrival time</th>"
++"<th>Burst time</th></tr>";
+            for (i=0;i<number;i++){
+                cd+='<tr><td>P'+(i+1)+'</td>'
++'<td><input class="input"  type="number" placeholder="     Enter P'+(i+1)+' A.T" name="fname" ></td>'
++'<td><input class="input"  type="number"  placeholder="     Enter P'+(i+1)+' B.T" name="fname" ></td></tr>';
+   }
+   tab.innerHTML=cd;
+        }
+	
+	
+	
+function myFunction() {
+	
+  var x = document.forms[0];
+  var text = "";
+  var i;
+  var a=[];
+  var pid=[];
+  var ipid=[];
+  var at=[];
+  var bt=[];
+  var n=x.length-2;
+  for (i = 0; i < n ;i++) 
+  if(x.elements[i].value=="") {
+document.getElementById("err").style.display="block";
+ return false;  }
+ document.getElementById("err").style.display="none";
+  for (i = 0; i < n ;i++) {
+  	a[i]=parseInt(x.elements[i].value) ;     
+  //  text += x.elements[i].value +"  "+a[i]+" <br> ";
+  }
+  
+  ipid[0]="P0";
+  for (i = 0; i < n/2 ;i++) {
+  ipid[i+1]="P"+(i+1);
+  pid[i]="P"+(i+1);
+  at[i]=a[i*2] ;
+  bt[i]=a[(i*2)+1] ;
+  }
+  text += " <br> at "+at+" <br> bt "+bt;
+  document.getElementById("demo").innerHTML = text;
+fcfs(pid,ipid,at,bt);
+}
+
+function fcfs(pid,ipid,ar,bt) {
+  var ct=[];
+  var tat=[];
+  var wt=[];
+  
+  var temp,avgwt=0,avgtat=0;
+  var n=ar.length;
+  var text2="";
+ // var ar=[];
+//  var bt=[];  
+var opid=[]; 
+var oar=[];
+  var obt=[]; 
+  
+  
+  for( let i = 0 ; i <n; i++) { 
+  
+ oar[i] = ar[i];
+ obt[i] = bt[i];
+}
+  
+for( let i = 0 ; i <n; i++)
+{
+for( let j=0; j < n-(i+1) ; j++)
+{
+if( ar[j] > ar[j+1] )
+{
+temp = ar[j];
+ar[j] = ar[j+1];
+ar[j+1] = temp;
+temp = bt[j];
+bt[j] = bt[j+1];
+bt[j+1] = temp;
+}
+}
+}
+
+
+
+// finding completion times
+for( i = 0 ; i < n; i++)
+{
+if( i == 0)
+{
+ct[i] = ar[i] + bt[i];
+}
+else
+{
+if( ar[i] > ct[i-1])
+{
+ct[i] = ar[i] + bt[i];
+}
+else
+ct[i] = ct[i-1] + bt[i];
+}
+tat[i] = ct[i] - ar[i] ; // turnaround time= completion time- arrival time
+wt[i] = tat[i] - bt[i] ; // waiting time= turnaround time- burst time
+avgwt += wt[i] ; // total waiting time
+avgtat += tat[i] ; // total turnaround time
+}
+
+ var oct=[];
+ var otat=[];  
+  var owt=[]; 
+  
+  var armin=ar[0]; // 1
+  
+  for( let i = 0 ; i <n; i++) 
+  for( let j = 0 ; j<n; j++) { 
+if( oar[j] == ar[i] )
+{ 
+oct[j] = ct[i];
+ owt[j] = wt[i];
+ otat[j] = tat[i]; 
+opid[i]=pid[ar[j]]; 
+} 
+}
+  
+
+  
+ text2 = "<br> pid "+pid+" <br> arrival "+ar+" <br> burst "+bt+
+" <br>ct "+ct+" <br> tat "+tat+
+" <br> wt "+wt+
+" <br> <br> oar "+oar+" <br> obt "+obt+
+" <br> oct "+oct+"<br> otat "+otat+"<br> owt "+owt+" <br> oPid "+opid+" <br> ar "+ar+" <br> Pid "+pid;
+document.getElementById("demo").innerHTML = text2;
+ solnTable(armin,oar,obt,oct,ct,otat,owt,opid,avgtat,avgwt);
+  }
+
+
+function solnTable(armin,at,bt,ct,pct,tat,wt,pid,avgtat,avgwt){
+		var soln = document.getElementById("soln");
+		var gchart = document.getElementById("gctab");
+		var n=at.length;
+		var table = '<table style="width:100%"><tr>'+
+  ' <th >PId</th>'+
+    '<th>A.T</th>'+ 
+    '<th>B.T</th>'+ 
+    '<th>C.T</th>'+ 
+    '<th>T.A.T</th>'+ 
+    '<th>W.T</th></tr>';
+  
+  for( let i = 0 ; i <n; i++) 
+ {   table+= '<tr><td>P'+(i+1)+'</td>'+
+    '<td class="td">'+at[i]+'</td>'+
+    '<td class="td">'+bt[i]+'</td>'+
+    '<td class="td">'+ct[i]+'</td>'+
+    '<td class="td">'+tat[i]+'</td>'+
+    '<td class="td">'+wt[i]+'</td></tr>' ;
+}
+table+= '</table>';
+
+
+/* // detailed
+var calwt='('+wt[0];
+var caltat='('+tat[0];
+for( let i = 1 ; i <n; i++) {
+calwt += '+'+wt[i]+'';
+caltat += '+'+tat[i]+'';
+}
+calwt += ")/"+n;
+caltat +=  ")/"+n;
+var text3 = '<table style="width:60%">'+
+'<tr><td class="tdl">Average T.A.T  </td>'+
+ '<td class="tdl">= '+caltat+'</td></tr>' +
+ '<tr><td></td>'+
+ '<td class="tdl">= '+(avgtat)+'/'+n+'</td></tr>'+
+ '<tr><td></td>'+
+ '<td class="tdl">= '+(avgtat/n).toFixed(2)+'(ms)</td></tr>'+
+'<tr><td class="tdl">Average W.T</td>'+
+ '<td class="tdl">= '+calwt+'</td></tr>' +
+ '<tr><td></td>'+
+ '<td class="tdl">= '+(avgwt)+'/'+n+'</td></tr>'+
+ '<tr><td></td>'+
+ '<td class="tdl">= '+(avgwt/n).toFixed(2)+'(ms)</td></tr></table>';
+ */
+ 
+let avgs= '<br><div>Average T.A.T = '+(avgtat)+'/'+n+' => '+(avgtat/n).toFixed(2)+'(ms)<br>Average W.T = '+(avgwt)+'/'+n+' => '+(avgwt/n).toFixed(2)+'(ms)</div>';
+soln.innerHTML=table+avgs;
+
+let gcp='<tr>';
+let gcn='</tr><tr><td class=tdln>'+0+'</td>';
+
+//gcp+='<td>idle</td>';
+//gcn+='<td class=tdln>'+armin+'</td>';
+for( var i = 0 ; i <n; i++) 
+{ 
+	gcp+='<td>'+pid[i]+'</td>';
+	gcn+='<td class=tdln>'+pct[i]+'</td>';
+}   
+
+// gcn+='<td class= tdln>'+pct[i]+'</td></tr>'; //ok transform:translateX(-7px);
+gchart.innerHTML=gcp+gcn;
+
+
+}
+
+function mysort(x) {
+  var s=[];
+  var text2="";
+ 
+  document.getElementById("demo").innerHTML = x.sort(function(a,b){return a-b});
+}
+
+</script>
+
+</body>
+</html>
