@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="aijaz posts">
+  <meta name="author" content="aijaz">
+
+  <title>A's Notes </title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Custom styles for this template -->
+  <style>
+    li {
+      border: none !important;
+      background-color: inherit !important;
+    }
+
+    pre {
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    a {
+      color: inherit !important;
+    }
+
+    a.btn {
+      box-shadow: none !important;
+    }
+
+    a:hover {
+      color: rgb(0, 102, 255) !important;
+    }
+
+    * {
+      font-size: 0.9rem;
+      box-sizing: border-box;
+    }
+    @media only screen and (min-width:320px) and (max-width:574px) {
+      * {
+        font-size: 0.84rem;
+      }
+.card-header{
+  padding-top:4px!important;
+  padding-bottom:4px!important;
+}
+    .note-title,.note-date{
+      margin-top: 4px;
+    }
+    .note-title{
+      margin-left:-8px !important;
+    }
+    .note-date{
+      margin-right:-2px ;
+    }
+    .btncopy{
+      margin-right:-12px ;
+      padding-left: 3px!important;
+    }
+    .btnformat{
+      margin-right:2px ;
+      padding-left: 3px!important;
+    }
+    }
+    @media only screen and (min-width:575px) {
+
+      .note-date{
+      margin-right:-3px ;
+    }
+    .btncopy{
+      padding-left: 4px!important;
+    }
+    .btnformat{
+      margin-right:4px ;
+      padding-left: 6px!important;
+      padding-right: 2px!important;
+    }
+    }
+
+    @media screen and (min-width: 425px) {
+      * {
+        font-size: 0.87rem;
+      }
+
+    }
+
+    @media screen and (min-width: 576px) {
+      * {
+        font-size: 1rem;
+      }
+
+
+    }
+
+    @media screen and (min-width: 768px) {
+      * {
+        font-size: 1.05rem;
+      }
+    }
+
+    @media screen and (min-width: 1440px) {
+      * {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- Page Content -->
+  <div class="container">
+
+
+    <div class="row">
+      <!-- Blog Entries 3/5/2020 border border-danger Column -->
+
+      <div class="mx-auto col-12 col-sm-11 col-md-9 col-lg-8 mt-5" id="notes">
+
+        <div class="card mb-4">
+          <div class="card-header p-sm-2 d-flex justify-content-between">
+
+            <div class="px-sm-2 note-title text-truncate">Body 4jg4u jfwewewdewdefefefeu4 mhifwhf hfrif in
+            </div>
+
+            <div class="btn-group  text-muted ">
+              <ul class="list-group list-group-horizontal note-date">
+                <li class="list-group-item p-0 p-sm-0 mr-1 "><i class="fa fa-clock-o mr-1"
+                    title="post date">&nbsp3/5/2020</i></li>
+              </ul>
+              <a class="p-0 btn btn-default btnformat border-left" href="#">
+                <i class="fa fa-indent" title="format"></i>
+              </a>
+              <a class="py-sm-0 p-0 btn btn-default btncopy border-left" href="#">
+                <i class="fa fa-clone" title="Copy"></i>
+              </a>
+            </div>
+
+          </div>
+          <div class="card-body p-2 p-sm-3">
+            <p class="mb-0"><span id="yui" class="card-text px-1 ">heloo beghd kdhd
+                jodj3
+                einiec ckehcikbeck</span>
+            </p>
+          </div>
+        </div>
+
+        <div class='card mt-5 '>
+          <div class='card-header border border-danger text-muted text-left'>
+            <div class='row border border-primary'>
+              <div class='card-title m-0 border border-danger font-weight-bold text-muted text-truncate'>test</div>
+              <div class='  text-muted text-truncate'>
+                <div class='row border border-success row-ti'>
+                  <div class='col-8 text-right timestamp'>3/5/2020</div>
+                  <div class='col-4 border border-danger mi btn'>
+                    <div class='more icon'></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class='card-body'>
+            <p><span class='card-text'>
+                test nohg
+                sxag
+                chvcadte huio
+              </span></p>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase.js"></script>
+
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyCyLkBz7jaLLcJ7Eq5dfe4rt6cP_U321VI",
+      authDomain: "aijazr.firebaseapp.com",
+      databaseURL: "https://aijazr.firebaseio.com",
+      projectId: "aijazr",
+      storageBucket: "aijazr.appspot.com",
+      messagingSenderId: "443016703997",
+      appId: "1:443016703997:web:e1c556188a30871f273394"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+
+
+
+var database = firebase.database();
+
+
+$(function () {   
+   loadCategoryData('default');
+});
+
+function loadCategoryData(category) {
+    $('#notes').html('');
+    database.ref('notes/' + category + '/').once('value', function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            $('.lds-ring').addClass('d-none');
+            var childKey = childSnapshot.key;
+            var childData = childSnapshot.val();
+            // console.log(childKey);
+            // console.log(childData);
+            // console.log(Object.keys(childData));
+
+            html= '<div class="card mb-4">'+
+            '<div class="card-header p-sm-2 d-flex justify-content-between">'+
+            '<div class="px-sm-2 note-title text-truncate">' + childData.tag.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + '</div>'+
+            '<div class="btn-group  text-muted ">'+
+            '<ul class="list-group list-group-horizontal note-date">'+
+            '<li class="list-group-item p-0 p-sm-0 mr-1 "><i class="fa fa-clock-o mr-1" title="post date">&nbsp'+ childData.timestamp +'</i></li></ul>'+
+            '<a class="p-0 btn btn-default btnformat border-left">'+
+            '<i class="fa fa-indent" title="format"></i></a>'+
+            '<a class="py-sm-0 p-0 btn btn-default btncopy border-left">'+
+            '<i class="fa fa-clone" title="Copy"></i></a></div></div>'+
+            '<div class="card-body p-2 p-sm-3">'+
+            '<p class="mb-0"><span id="yui" class="card-text px-1 ">' + childData.note.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + '</span></p></div></div>'
+              $('#notes').prepend(html);
+        });
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$('#notes').on('click','.btncopy', function () {  
+    $span= $(this).parentsUntil('.card').next().find('span.card-text');
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($span.text()).select();
+    document.execCommand("copy");
+    $temp.remove();        
+    setTimeout(() => {
+    $(this).tooltip('hide'); 
+ }, 600);
+})
+$('#notes').tooltip({title: "Copied!",selector:".btncopy",placement: "top",trigger: "click", animation: true});
+
+// $('#notes').on('click','.btncopy', function () { 
+//     $('.btncopy').tooltip({title: "Copied!",placement: "top",trigger: "click", animation: true});
+// })
+
+$('#notes').on('click','.btnformat', function () {  
+   $span= $(this).parentsUntil('.card').next().find('span.card-text');
+//    $span.css('background','red')
+        if ($span.parent().is( "pre" ) ) {
+            $span.unwrap();
+            $span.wrap( "<p class='mb-0'></p>" );
+        } 
+        else if ($span.parent().is( "p" ) ) {
+            $span.unwrap();
+            $span.wrap( "<pre class='mb-0'></pre>" );
+        } else{
+
+        }
+})
+
+
+
+
+</script>
+</body>
