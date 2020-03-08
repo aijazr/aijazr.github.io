@@ -36,7 +36,9 @@
     a:hover {
       color: rgb(0, 102, 255) !important;
     }
-
+    .copycolor {
+      color: rgb(8, 85, 201) !important;
+    }
     * {
       font-size: 0.9rem;
       box-sizing: border-box;
@@ -239,19 +241,9 @@ function loadCategoryData(category) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 $('#notes').on('click','.btncopy', function () {  
+  $(this).addClass('copycolor') 
+
     $span= $(this).parentsUntil('.card').next().find('span.card-text');
     var $temp = $("<input>");
     $("body").append($temp);
@@ -260,6 +252,7 @@ $('#notes').on('click','.btncopy', function () {
     $temp.remove();        
     setTimeout(() => {
     $(this).tooltip('hide'); 
+    $(this).removeClass('copycolor') 
  }, 600);
 })
 $('#notes').tooltip({title: "Copied!",selector:".btncopy",placement: "top",trigger: "click", animation: true});
@@ -269,6 +262,8 @@ $('#notes').tooltip({title: "Copied!",selector:".btncopy",placement: "top",trigg
 // })
 
 $('#notes').on('click','.btnformat', function () {  
+  $(this).addClass('copycolor') 
+
    $span= $(this).parentsUntil('.card').next().find('span.card-text');
 //    $span.css('background','red')
         if ($span.parent().is( "pre" ) ) {
@@ -281,6 +276,9 @@ $('#notes').on('click','.btnformat', function () {
         } else{
 
         }
+        setTimeout(() => {
+    $(this).removeClass('copycolor') 
+ }, 400);
 })
 
 
