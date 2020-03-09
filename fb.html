@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Custom styles for this template -->
-  <style>
+   <style>
     li {
       border: none !important;
       background-color: inherit !important;
@@ -33,28 +33,26 @@
       box-shadow: none !important;
     }
 
+    a:hover {
+      color: rgb(0, 102, 255) !important;
+    }
     .copycolor {
       color: rgb(8, 85, 201) !important;
     }
-
     * {
       font-size: 0.9rem;
       box-sizing: border-box;
     }
     @media only screen and (min-width:320px) and (max-width:574px) {
       * {
-        font-size: 0.84rem;
+        font-size: 0.96rem;
       }
-      
-    a:hover {
-      color: rgb(0, 102, 255) !important;
-    }
 .card-header{
-  padding-top:4px!important;
-  padding-bottom:4px!important;
+  padding-top:5px!important;
+  padding-bottom:5px!important;
 }
     .note-title,.note-date{
-      margin-top: 4px;
+      margin-top: 2px;
     }
     .note-title{
       margin-left:-8px !important;
@@ -63,12 +61,14 @@
       margin-right:-2px ;
     }
     .btncopy{
-      margin-right:-12px ;
-      padding-left: 3px!important;
+      margin-right:-8px ;
+      padding-left: 9px!important;
+      /* padding-right: px!important; */
+
     }
     .btnformat{
-      margin-right:2px ;
-      padding-left: 3px!important;
+      margin-right:8px ;
+      padding-left: 9px!important;
     }
     }
     @media only screen and (min-width:575px) {
@@ -86,20 +86,7 @@
     }
     }
 
-    @media screen and (min-width: 425px) {
-      * {
-        font-size: 0.87rem;
-      }
 
-    }
-
-    @media screen and (min-width: 576px) {
-      * {
-        font-size: 1rem;
-      }
-
-
-    }
 
     @media screen and (min-width: 768px) {
       * {
@@ -251,6 +238,9 @@ function loadCategoryData(category) {
 
 
 
+
+
+
 $('#notes').on('click','.btncopy', function () {  
   $(this).addClass('copycolor') 
 
@@ -288,8 +278,10 @@ $('#notes').on('click','.btnformat', function () {
         }
         setTimeout(() => {
     $(this).removeClass('copycolor') 
- }, 600);
+ }, 400);
 })
+
+
 
 
 </script>
