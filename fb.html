@@ -263,6 +263,8 @@ $('#notes').tooltip({title: "Copied!",selector:".btncopy",placement: "top",trigg
 
 $('#notes').on('click','.btnformat', function () {  
   $(this).addClass('copycolor') 
+   $(this).children().toggleClass('fa-indent') 
+  $(this).children().toggleClass('fa-align-justify') 
 
    $span= $(this).parentsUntil('.card').next().find('span.card-text');
 //    $span.css('background','red')
