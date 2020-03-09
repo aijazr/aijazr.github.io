@@ -45,18 +45,30 @@
       * {
         font-size: 0.96rem;
       }
+
 .card-header{
   padding-top:5px!important;
   padding-bottom:5px!important;
 }
-    .note-title,.note-date{
+    .note-title{
       margin-top: 2px;
     }
+
     .note-title{
       margin-left:-8px !important;
     }
-    .note-date{
-      margin-right:-2px ;
+
+    .clockicon{
+      margin-top: 5px;
+      font-size: 16px!important;
+      padding-right:4px ;
+
+      /* display: none; */
+    }
+    .clockdate{
+      margin-top: 3px;
+      font-size: 12px!important;
+      display: none;
     }
     .btncopy{
       margin-right:-8px ;
@@ -73,15 +85,19 @@
       a:hover {
       color: rgb(0, 102, 255) !important;
     }
+    .clockicon{
+      margin-top: 6px;
+    }
+    
       .note-date{
-      margin-right:-3px ;
+      margin-right:0px ;
     }
     .btncopy{
-      padding-left: 4px!important;
+      padding-left: 8px!important;
     }
     .btnformat{
-      margin-right:4px ;
-      padding-left: 6px!important;
+      margin-right:8px ;
+      padding-left: 10px!important;
       padding-right: 2px!important;
     }
     }
@@ -122,8 +138,8 @@
 
             <div class="btn-group  text-muted ">
               <ul class="list-group list-group-horizontal note-date">
-                <li class="list-group-item p-0 p-sm-0 mr-1 "><i class="fa fa-clock-o mr-1"
-                    title="post date">&nbsp3/5/2020</i></li>
+                <i class="fa fa-clock-o mr-1 clockicon" title="post date :3/5/2020"></i>
+                <li class="list-group-item p-0 p-sm-0 mr-1 clockdate">3/5/2020</li>
               </ul>
               <a class="p-0 btn btn-default btnformat border-left" href="#">
                 <i class="fa fa-indent" title="format"></i>
@@ -212,13 +228,13 @@ function loadCategoryData(category) {
             // console.log(childKey);
             // console.log(childData);
             // console.log(Object.keys(childData));
-
+ 
             html= '<div class="card mb-4">'+
             '<div class="card-header p-sm-2 d-flex justify-content-between">'+
             '<div class="px-sm-2 note-title text-truncate">' + childData.tag.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + '</div>'+
             '<div class="btn-group  text-muted ">'+
-            '<ul class="list-group list-group-horizontal note-date">'+
-            '<li class="list-group-item p-0 p-sm-0 mr-1 "><i class="fa fa-clock-o mr-1" title="post date">&nbsp'+ childData.timestamp +'</i></li></ul>'+
+            '<ul class="list-group list-group-horizontal note-date"><i class="fa fa-clock-o mr-1 clockicon" title="'+ childData.timestamp +'"></i>'+
+            '<li class="list-group-item p-0 p-sm-0 mr-1 clockdate">'+ childData.timestamp +'</li></ul>'+
             '<a class="p-0 btn btn-default btnformat border-left">'+
             '<i class="fa fa-indent" title="format"></i></a>'+
             '<a class="py-sm-0 p-0 btn btn-default btncopy border-left">'+
@@ -240,6 +256,16 @@ function loadCategoryData(category) {
 
 
 
+
+$('#notes').on('click','.clockicon', function () {  
+  $(this).addClass('copycolor') 
+   
+    setTimeout(() => {
+    $(this).tooltip('hide'); 
+    $(this).removeClass('copycolor') 
+ }, 1500);
+})
+$('#notes').tooltip({title: "Copied!",selector:".clockicon",placement: "top",trigger: "click", animation: true});
 
 $('#notes').on('click','.btncopy', function () {  
   $(this).addClass('copycolor') 
