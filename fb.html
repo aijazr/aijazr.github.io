@@ -15,6 +15,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Custom styles for this template -->
    <style>
+     
+.tag-color{
+  color:#48515a;
+}
+.search-color{
+  color:#c19719bd;
+  font-weight: bold;
+}
     li {
       border: none !important;
       background-color: inherit !important;
@@ -120,15 +128,40 @@
 
 <body>
 
-
+  <!-- <nav class="navbar navbar-light fixed-top bg-light">
+    <div class="mx-auto col-12 col-sm-11 col-md-9 col-lg-8 ">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Type here to search" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <div class="input-group-append ml-0" style="width:170px;">
+          <select class="custom-select" id="inputGroupSelect02">
+            <option selected>Default Category</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>     
+         </div>
+      </div>
+    </div>
+  </nav> -->
   <!-- Page Content -->
-  <div class="container">
+  <div class="container ">
 
 
     <div class="row">
       <!-- Blog Entries 3/5/2020 border border-danger Column -->
 
-      <div class="mx-auto col-12 col-sm-11 col-md-9 col-lg-8 mt-5" id="notes">
+      <div class="mx-auto col-12 col-sm-11 col-md-9 col-lg-8 pt-3 mt-4 ">
+        <div class="input-group ">
+          <input type="text" id="search" autocomplete="off" class="form-control" placeholder="Type here to search" aria-label="Recipient's username" aria-describedby="button-addon2">
+          <div class="input-group-append ml-0" style="width:170px;">
+            <select class="custom-select" id="tabcategory">
+              <option selected>Default Category</option>
+              <option value="">loading</option>
+            </select>     
+           </div>
+        </div>
+      </div>
+      <div class="mx-auto col-12 col-sm-11 col-md-9 col-lg-8 mt-4 overflow-hidden" id="notes">
 
         <div class="card mb-4">
           <div class="card-header p-sm-2 d-flex justify-content-between">
@@ -207,16 +240,25 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-  <script type="text/javascript">
+  <script >
 
-
+    
 
 var database = firebase.database();
 
+$('#tabcategory').on('change', function () {
+    $('.lds-ring').removeClass('d-none');
+    loadCategoryData(this.value);
+
+})
+
 
 $(function () {   
+   loadCategory();
    loadCategoryData('default');
+//    $('#year').text(new Date().getFullYear());
 });
+
 
 function loadCategoryData(category) {
     $('#notes').html('');
@@ -231,7 +273,7 @@ function loadCategoryData(category) {
  
             html= '<div class="card mb-4">'+
             '<div class="card-header p-sm-2 d-flex justify-content-between">'+
-            '<div class="px-sm-2 note-title text-truncate">' + childData.tag.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + '</div>'+
+            '<div class="px-sm-2 note-title tag-color text-truncate">' + childData.tag.replace(/</ig, '&lt;').replace(/>/ig, '&gt;') + '</div>'+
             '<div class="btn-group  text-muted ">'+
             '<ul class="list-group list-group-horizontal note-date"><i class="fa fa-clock-o mr-1 clockicon" title="'+ childData.timestamp +'"></i>'+
             '<li class="list-group-item p-0 p-sm-0 mr-1 clockdate">'+ childData.timestamp +'</li></ul>'+
@@ -247,16 +289,6 @@ function loadCategoryData(category) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
 $('#notes').on('click','.clockicon', function () {  
   $(this).addClass('copycolor') 
    
@@ -269,7 +301,6 @@ $('#notes').tooltip({title: "Copied!",selector:".clockicon",placement: "top",tri
 
 $('#notes').on('click','.btncopy', function () {  
   $(this).addClass('copycolor') 
-
     $span= $(this).parentsUntil('.card').next().find('span.card-text');
     var $temp = $("<input>");
     $("body").append($temp);
@@ -311,6 +342,37 @@ $('#notes').on('click','.btnformat', function () {
 
 
 
+function loadCategory() {
+    let html = "<option selected value='default'>Default Category</option>";
+    $('#tabcategory').html(html);
 
-</script>
+    database.ref('notes/').once('value', function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            var childKey = childSnapshot.key;
+            html = "<option value=" + childKey + ">" + childKey + "</option>";
+            if (childKey != 'default') {
+                $('#tabcategory').append(html);
+            }
+        });
+
+    });
+}
+
+
+$(document).ready(function(){
+    $("#search").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("div.note-title").filter(function() {
+        $(this).parentsUntil('#notes').toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        $(this).addClass('search-color')
+        if(value.length==0){
+           $(this).removeClass('search-color')
+        }
+    });
+    });
+  });
+
+
+  </script>
+
 </body>
