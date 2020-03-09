@@ -42,6 +42,10 @@
     }
 
 
+    .selcat {
+width: 170px;    
+}
+
     .copycolor {
       color: rgb(0, 102, 255) !important;
     }
@@ -49,10 +53,15 @@
       font-size: 0.9rem;
       box-sizing: border-box;
     }
-    @media only screen and (min-width:320px) and (max-width:574px) {
+    @media only screen and (min-width:310px) and (max-width:574px) {
       * {
         font-size: 0.96rem;
+        
       }
+      
+    .selcat {
+    width: 112px;    
+         }
 
 .card-header{
   padding-top:5px!important;
@@ -153,9 +162,9 @@
       <div class="mx-auto col-12 col-sm-11 col-md-9 col-lg-8 pt-3 mt-4 ">
         <div class="input-group ">
           <input type="text" id="search" autocomplete="off" class="form-control" placeholder="Type here to search" aria-label="Recipient's username" aria-describedby="button-addon2">
-          <div class="input-group-append ml-0" style="width:170px;">
+          <div class="input-group-append ml-0 selcat">
             <select class="custom-select" id="tabcategory">
-              <option selected>Default Category</option>
+              <option selected>Default</option>
               <option value="">loading</option>
             </select>     
            </div>
@@ -343,7 +352,7 @@ $('#notes').on('click','.btnformat', function () {
 
 
 function loadCategory() {
-    let html = "<option selected value='default'>Default Category</option>";
+    let html = "<option selected value='default'>Default </option>";
     $('#tabcategory').html(html);
 
     database.ref('notes/').once('value', function (snapshot) {
