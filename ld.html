@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<td lang="en">
-
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -42,15 +41,16 @@
 
 
 
-    /* .table tbody>tr>td {
-      border: 1px solid;
+     .table tbody>tr>td {
+    /*  border: 1px solid; */
        max-width: 150px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap 
-    } */
+    } 
 
-    .table thead>tr>th {
+   /* .table thead>tr>th  */
+.tdname,.tdsize{
       /*    border: 1px solid; */
      max-width: 150px;
       overflow: hidden;
@@ -108,11 +108,8 @@
     }
     .tdname{
       padding-left: 0!important;
-      max-width: 150px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap
     }
+
     .tdicon{
       padding-right: 4px!important;
       width: 0.1px;
@@ -294,7 +291,7 @@ $('#category').prepend(html);
         let html2 = `<tr id="${file.id}">
         <td class="tdicon"><img onclick="toModal(this)" src="${file.iconLink}" id="${file.thumbnailLink}" class="thumb"></td>
         <td class="tdname">${file.name}</td>
-        <td class="">${readableBytes(file.size)}</td>
+        <td class="tdsize">${readableBytes(file.size)}</td>
         <td class="">${formatDate(file.modifiedTime)}</td>
         <td class="pr-1"><a href='#' onclick="toLoad(this)"><i class="fa fa-download" aria-label="true"></i></a></td>
         <td class="pr-1"><a  href="#" onclick="toView(this.parentNode)"><i class="fa fa-external-link" aria-label="true"></i></a></td>
@@ -329,3 +326,4 @@ $('#imgModal').modal('show');
  }
   </script>
 </body>
+</html>
