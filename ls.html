@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #000000;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 10px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: rgb(36, 45, 53);
+  color: white;
+}
+
+.topnav a.active {
+  background-color: rgb(36, 45, 53);
+  color: white;
+}
+
+.topnav .icon {
+  display: block;
+      float: right;
+}
+
+  .topnav a:not(:first-child) {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+
+
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  #img-loader{
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  }
+.load{
+  background: url('//upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Phi_fenomeni.gif/50px-Phi_fenomeni.gif') 
+              50% 50% no-repeat rgb(249,249,249);
+}
+.done{
+  background: url('//upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Phi_fenomeni.gif/50px-Phi_fenomeni.gif') 
+              50% 50% no-repeat rgb(249,249,249);
+}
+</style>
+</head>
+<body>
+<div style="width: 100%; height: 100%;position: absolute;" >
+
+<div style="height:6%;position: relative;z-index:1000;" >
+    <div class="topnav" id="myTopnav">
+        <a id="first-a" href="#home" class="active">Home</a>
+        <a onclick="loadPage(this.className)" class="https://www.w3schools.com/jquery/event_on.asp" href="#news">demo</a>
+        <a href="#" class="icon" onclick="toggleIcon()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
+</div>
+
+      <div id="frame-div"  style="width: 100%; height: 100%;position: relative;" >
+<div id="img-loader" class="done"></div>
+        <iframe src="" style="position:absolute; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:100;">
+        Your browser doesn't support iframes
+    </iframe>
+</div>
+
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+function toggleIcon() {
+  $('#myTopnav').toggleClass('responsive');
+}
+function loadPage(link) {
+$('iframe').attr('src',link);
+toggleIcon()
+}
+$(document).ready(function(){
+
+$.ajax({
+  type: "get",
+  crossDomain: true,
+  url: "https://script.google.com/macros/s/AKfycbxSwY669jFdJ-prKEHt_kxcLNodO47zI6IqWMEXvh4R/exec",
+  dataType: "jsonp",
+  success: function (response) {
+response.forEach(e=> {
+  $('#first-a').after('<a onclick="loadPage(this.className)"  class="'+e.link+'" href="#">'+e.name+'</a>'); 
+});   
+// console.log(response)
+$('#img-loader').remove();
+  }
+});
+});
+</script>
+</body>
+</html>
