@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<style> 
+</style>
+<script src="jquery.min.js"></script>
+</head>
+<body>
+	
+Github Api Logger
+   
+<script>
+//    mkreq("https://api.github.com/repos/aijazr/aijazr.github.io/git/trees/c57cc8bc8f36da9c8558972d2462ff4a61d054e5")
+//  mkreq()
+ function mkreq(url){	
+$.ajax({
+url : "https://api.github.com/repos/aijazr/aijazr.github.io/git/trees/c57cc8bc8f36da9c8558972d2462ff4a61d054e5",
+type: 'get',    
+headers: {Authorization: "token fdc2d2ddde3c833a3063fb5a5caee02819216662"},
+}).done(function(response) {
+// console.log(response) 
+ (response.tree).forEach(item =>{ 
+	 if(item.type  == "blob")
+ console.log(item.path,item.url);
+// else{mkreq(item.url);}
+ })
+
+}).fail(function(response) {
+  console.log(response);
+});
+
+}
+
+  //   ocnufile("oktest.html","yu") 
+function ocnufile(filename,filecontent,filesha) {
+var contents_url = "https://api.github.com/repos/aijazr/aijazr.github.io/contents/"+filename
+var filemessage = "Creating/Updating the file";
+var basecontent = btoa(filecontent);
+var sha = filesha || ""
+var filedata = `{"message":"${filemessage}","content":"${basecontent}","sha":"${sha}"}`;
+$.ajax({ 
+    url: contents_url,
+    type: "PUT",
+    headers: {Authorization: "Basic YWlqYXpyOm90dXNlMkBnaXRodWI="},
+    data: filedata
+}).done(function(response) {
+      console.log("success",response);
+      }).fail(function(response) {
+      	console.log("error",response);
+      	if(response.status==422 || response.status== 409){ console.log(filename+" filename already exist"); }
+        });
+}
+
+/*    
+{
+"path":"firstfile.txt",
+"mode":"100644",
+"type":"blob",
+"sha":"4f9fac3c3d650ac5c388ddb967d7f326576e041d",
+"size":21,
+"url":"https://api.github.com/repos/aijazr/aijazr.github.io/git/blobs/4f9fac3c3d650ac5c388ddb967d7f326576e041d"
+},
+    */
+
+  </script>
+  
+  
+</body>
+</html>
