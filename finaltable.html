@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="aijaz posts">
+    <meta name="author" content="aijaz">
+    <title>A's Notes </title> <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Custom styles for this template -->
+    <style>
+    *{
+       box-sizing: border-box!important;
+     }
+
+.wrapper {
+ /* //   	width: 400px; */
+  height: 450px;
+/* // border: 1px solid #333; */
+  overflow-y: auto;
+}
+
+thead>tr>th {
+    position: -webkit-sticky;
+   position : sticky;
+top : -1px;
+z-index: 2;
+ box-shadow: inset 0 1px 0 #dee2e6, inset 0 -1px 0 #dee2e6;
+/* background: black!important; */
+  /* position: sticky; */
+ /* // box-shadow: 0 6px 6px -5px rgba(0, 0, 0, 0.4); */
+}
+
+
+    .no-left-border {
+
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+    }
+        .table-fix tbody {
+      height: 450px;
+      overflow-y: auto;
+      width: 100%;
+
+    }
+    
+    .table tbody>tr>td{
+      /* border: 1px solid; */
+      max-width: 150px;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap
+    }
+    .table thead>tr>th{
+ /* //     border: 1px solid; */
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap
+    }
+    .sticky-top{
+     border: 1px solid;
+    }
+    .table-fix thead,
+    .table-fix tbody,
+    .table-fix tr,
+    .table-fix td,
+    .table-fix th {
+      display: block;
+      /* border: 1px solid; */
+
+    }
+
+    .table-fix tbody td,
+    .table-fix tbody th,
+    .table-fix thead>tr>th {
+      float: left;
+      position: relative;
+
+    }
+.tag-color{
+  color:#48515a;
+}
+.search-color{
+  color:#c19719bd;
+  font-weight: bold;
+}
+.selcat {
+width: 170px;    
+}
+
+
+ * {
+      font-size: 0.9rem !important;
+      box-sizing: border-box;
+    }
+    @media only screen and (min-width:310px) and (max-width:574px) {
+      * {
+       font-size: 0.919rem !important;      
+/* //  font-size: 0.949rem !important; */
+        
+      }
+      
+    .selcat {
+    width: 112px;    
+         }
+
+    
+    }
+  @media screen and (min-width: 574px) {
+      * {
+        font-size: 1.0rem !important;
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      * {
+        font-size: 1.0rem !important;
+
+      }
+    }
+
+    @media screen and (min-width: 1440px) {
+      * {
+        font-size: 1.0rem !important;
+      }
+    }
+
+    </style>
+</head>
+
+<body>
+    <!-- Page Content -->
+    <div class="container ">
+        <!-- name,iconLink,id,webContentLink,webViewLink,modifiedTime      fileExtension -->
+        <div class="res"></div>
+        <div class="row">
+            <div class="mx-auto col-12 col-sm-11 col-md-10 col-lg-9 pt-3 mt-4 ">
+                <div class="input-group mb-3"> <input type="text" id="search" autocomplete="off" class="form-control" placeholder="Type here to search" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <div style="z-index:0" class="input-group-append selcat"> <select class="custom-select no-left-border" id="tabcategory">
+                            <option selected="">Default</option>
+                            <option value="">loading</option>
+                        </select> </div>
+                </div> <!-- Actual -->
+                <div class="card mb-2">
+                    <div class="card-body p-0">
+                        <div class="table-responsive wrapper">
+                            <table class=" table table-sm ">
+                                <thead class="thead-light">
+                                    <tr class="ui45">
+                                        <th class="">Name</th>
+                                        <th class=" tp">Size</th>
+                                        <th class=" tp">Size2</th>
+                                        <th class=" tp">Date</th>
+                                        <th class=" tp">Date2</th>
+                                        <th class=" tp"><i class="fa fa-th-large" aria-hidden="true"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tdata2">
+                                    <tr>
+                                        <td class="nw"> <img src="https://drive-thirdparty.googleusercontent.com/16/type/application/zip" alt="#" class="img-flukid"> mx_player_1.9.15.xml</td>
+                                        <td class="sw">564</td>
+                                        <td class="dw">2020-07-06T09:39:35.725Z</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><!-- --over -->
+            </div>
+        </div>
+    </div>
+    <!--   <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase.js"></script>  <script>    // Your web app's Firebase configuration    var firebaseConfig = {      apiKey: "AIzaSyCyLkBz7jaLLcJ7Eq5dfe4rt6cP_U321VI",      authDomain: "aijazr.firebaseapp.com",      databaseURL: "https://aijazr.firebaseio.com",      projectId: "aijazr",      storageBucket: "aijazr.appspot.com",      messagingSenderId: "443016703997",      appId: "1:443016703997:web:e1c556188a30871f273394"    };    // Initialize Firebase    firebase.initializeApp(firebaseConfig);  </script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+        // var database = firebase.database();
+
+// $('#tabcategory').on('change', function () {
+//     $('.lds-ring').removeClass('d-none');
+//     loadCategoryData(this.value);
+
+// })
+
+
+$(function () {   
+  
+  loadData();
+ // $('td.sw').html(readableBytes($('td.sw').html()));
+ // let date = new Date();
+ // let date = '2028-03-06T09:39:35.725Z';
+ // var options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+
+ // $('td.dw').html(formatDate(date))
+ // $('.res').html(formatDate(date))
+
+ // $('.res').html(datef);
+ //  loadData();
+ //  loadData();
+
+
+});
+function formatDate(timestamp){
+ let date=new Date(timestamp)
+   let hour = date.getHours()   
+   return twoDigitPad(date.getDate())+'-'+
+   twoDigitPad(date.getMonth()+1)+'-'+
+   date.getFullYear();  
+}
+function formatTime(timestamp){
+ let date=new Date(timestamp)
+   let hour = date.getHours()   
+   return twoDigitPad(date.getDate())+'-'+
+   twoDigitPad(date.getMonth()+1)+'-'+
+   date.getFullYear()+' '+
+   (hour%12)+':'+
+   twoDigitPad(date.getMinutes())+' '+
+   (hour < 12 ? 'AM' : 'PM');  
+}
+function twoDigitPad(num) {
+   return num < 10 ? "0" + num : num;
+}
+function readableBytes(bytes) {
+ if(bytes==0) {return '0 B'}
+   let i = Math.floor(Math.log(bytes) / Math.log(1024)),
+   sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+return (bytes / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + sizes[i];
+}
+// https://us-central1-aijazr.cloudfunctions.net/ajz/fs
+function loadData() {
+$.ajax({
+ type: "get",
+ url: "https://us-central1-aijazr.cloudfunctions.net/ajz/fs",
+ dataType: "json",
+ success: function (response) {
+         processList(response)
+}
+});
+}
+
+function processList(files) {
+$('#tdata2').html('');
+let c=0;
+   files.forEach(file => {
+       // console.log(file.name + '|' + file.size + '|' + file.id + '|' + file.modifiedTime);
+
+let html2=`<tr>
+<td class=""><img src="${file.iconLink}" alt="#" class="img-fluid"> ${file.name}</td>
+       <td class="">${readableBytes(file.size)}</td>
+       <td class="">${readableBytes(file.size)+"ok"}</td>
+       <td class="">${formatDate(file.modifiedTime)}</td>
+       <td class="">${formatDate(file.modifiedTime)}</td>
+       <td class=""><a href="${file.webContentLink}"><i class="fa fa-download" aria-hidden="true"></i></a></td>
+       </tr>`;
+       
+       $('#tdata2').append(html2);
+   });
+  
+ 
+
+}
+ // $('#tdata').html('');
+
+           // html= '<div class="card mb-4">'+
+           // '<div class="card-header p-sm-2 d-flex justify-content-between">'+
+           // '<div class="px-sm-2 note-title tag-color text-truncate">' + childData.tag.replace(/</ig, '<').replace(/>/ig, '>') + '</div>'+
+           // '<div class="btn-group  text-muted ">'+
+           // '<ul class="list-group list-group-horizontal note-date"><i class="fa fa-clock-o mr-1 clockicon" title="'+ childData.timestamp +'"></i>'+
+           // '<li class="list-group-item p-0 p-sm-0 mr-1 clockdate">'+ childData.timestamp +'</li></ul>'+
+           // '<a class="p-0 btn btn-default btnformat border-left">'+
+           // '<i class="fa fa-indent" title="format"></i></a>'+
+           // '<a class="py-sm-0 p-0 btn btn-default btncopy border-left">'+
+           // '<i class="fa fa-clone" title="Copy"></i></a></div></div>'+
+           // '<div class="card-body p-2 p-sm-3">'+
+           // '<p class="mb-0"><span id="yui" class="card-text px-1 ">' + childData.note.replace(/</ig, '<').replace(/>/ig, '>') + '</span></p></div></div>'
+           //   $('#notes').prepend(html);
+
+
+
+// $('#notes').on('click','.clockicon', function () {  
+//   $(this).addClass('copycolor') 
+  
+//     setTimeout(() => {
+//     $(this).tooltip('hide'); 
+//     $(this).removeClass('copycolor') 
+//  }, 1500);
+// })
+// $('#notes').tooltip({title: "Copied!",selector:".clockicon",placement: "top",trigger: "click", animation: true});
+
+// $('#notes').on('click','.btncopy', function () {  
+//   $(this).addClass('copycolor') 
+//     $span= $(this).parentsUntil('.card').next().find('span.card-text');
+//     var $temp = $("<input>");
+//     $("body").append($temp);
+//     $temp.val($span.text()).select();
+//     document.execCommand("copy");
+//     $temp.remove();        
+//     setTimeout(() => {
+//     $(this).tooltip('hide'); 
+//     $(this).removeClass('copycolor') 
+//  }, 600);
+// })
+// $('#notes').tooltip({title: "Copied!",selector:".btncopy",placement: "top",trigger: "click", animation: true});
+
+// // $('#notes').on('click','.btncopy', function () { 
+// //     $('.btncopy').tooltip({title: "Copied!",placement: "top",trigger: "click", animation: true});
+// // })
+
+// $('#notes').on('click','.btnformat', function () {  
+//   $(this).addClass('copycolor') 
+//    $(this).children().toggleClass('fa-indent') 
+//   $(this).children().toggleClass('fa-align-justify') 
+
+//    $span= $(this).parentsUntil('.card').next().find('span.card-text');
+// //    $span.css('background','red')
+//         if ($span.parent().is( "pre" ) ) {
+//             $span.unwrap();
+//             $span.wrap( "<p class='mb-0'></p>" );
+//         } 
+//         else if ($span.parent().is( "p" ) ) {
+//             $span.unwrap();
+//             $span.wrap( "<pre class='mb-0'></pre>" );
+//         } else{
+
+//         }
+//         setTimeout(() => {
+//     $(this).removeClass('copycolor') 
+//  }, 400);
+// })
+
+
+
+// function loadCategory() {
+//     let html = "<option selected value='default'>Default </option>";
+//     $('#tabcategory').html(html);
+
+//     database.ref('notes/').once('value', function (snapshot) {
+//         snapshot.forEach(function (childSnapshot) {
+//             var childKey = childSnapshot.key;
+//             html = "<option value=" + childKey + ">" + childKey + "</option>";
+//             if (childKey != 'default') {
+//                 $('#tabcategory').append(html);
+//             }
+//         });
+
+//     });
+// }
+
+
+// $(document).ready(function(){
+//     $("#search").on("keyup", function() {
+//       var value = $(this).val().toLowerCase();
+//       $("div.note-title").filter(function() {
+//         $(this).parentsUntil('#notes').toggle($(this).text().toLowerCase().indexOf(value) > -1)
+//         $(this).addClass('search-color')
+//         if(value.length==0){
+//            $(this).removeClass('search-color')
+//         }
+//     });
+//     });
+//   });
+
+
+     </script>
+ 
+
+
+</body>
+</html>
