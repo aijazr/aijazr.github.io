@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head><style>
+	#log-container,#l-o-g-container {border :1px solid;overflow: auto; width:100%;height: 150px; }
+var colorObj = { boolean:"blue", undefined:"red", object:"grey", string:"darkgreen",number:"black"  }
+body {background: #fff;}
+.log-boolean{color: blue;}
+.log-undefined {color: red;}
+.log-object{color: grey;}
+.log-string {color: darkgreen;}
+.log-number {color: black;}
+ </style>
+ </head><body> 
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+console.log <br>
+<div id="log-container">
+  <pre id="log"><span class="log-string">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;style&gt;
+	#log-container,#l-o-g-container {border :1px solid;overflow: auto; width:100%;height: 150px; }
+var colorObj = { boolean:"blue", undefined:"red", object:"grey", string:"darkgreen",number:"black"  }
+body {background: #fff;}
+.log-boolean{color: blue;}
+.log-undefined {color: red;}
+.log-object{color: grey;}
+.log-string {color: darkgreen;}
+.log-number {color: black;}
+ &lt;/style&gt;
+ &lt;/head&gt;&lt;body&gt; 
+ 	&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"&gt;&lt;/script&gt;
+console.log &lt;br&gt;
+&lt;div id="log-container"&gt;
+  &lt;pre id="log"&gt;&lt;/pre&gt;
+&lt;/div&gt;
+mclg &lt;br&gt;
+&lt;div id="l-o-g-container"&gt;
+  &lt;pre id="l-o-g"&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+ 
+(function (logger) {
+    console.old = console.log;
+    console.log = function () {
+        var output = "", arg, i;
+
+        for (i = 0; i &lt; arguments.length; i++) {
+            arg = arguments[i];
+            output += "&lt;span class=\"log-" + (typeof arg) + "\"&gt;";
+
+            if (
+                typeof arg === "object" &amp;&amp;
+                typeof JSON === "object" &amp;&amp;
+                typeof JSON.stringify === "function"
+            ) {
+            	str= JSON.stringify(arg);   
+                output +=  str.replace(/,/g ,',\n').replace(/{/g ,'{\n').replace(/}/g ,'\n}');   
+            } else {
+                output += arg;   
+            }
+
+            output += "&lt;/span&gt;&amp;nbsp;";
+        }
+
+        logger.innerHTML += output + "&lt;br&gt;";
+        console.old.apply(undefined, arguments);
+    };
+})(document.getElementById("log"));
+
+mclg()
+// Testing
+var obj=  { a:"bhhjn",
+
+c:"jhgn",
+
+
+b:"bhgbb" }
+console.log(obj)
+console.log("Hi!", {a:3, b:6}, 42, true);
+console.log("Multiple", "arguments", "here");
+
+console.log(null, undefined);
+//for now console.old("Eyy that's the old and boring one.",6);
+console.log('How', true, new Date());
+console.log("5986",7.5)
+console.log("ok",7.5)
+console.log("Hi!", {a:3, b:6}, 42, true);
+console.log("Multiple", "arguments", "here");
+ 
+ 
+console.log(null, undefined);
+//for now console.old("Eyy that's the old and boring one.",6);
+console.log('How', true, new Date());
+console.log("5986",7.5)
+console.log("ok",7.5)
+console.log("Hi!", {a:3, b:6}, 42, true);
+console.log("Multiple", "arguments", "here");
+
+console.log(null, undefined);
+//for now console.old("Eyy that's the old and boring one.",6);
+console.log('How', true, new Date());
+console.log("5986",7.5)
+console.log("ok",7.5)
+ &lt;/script&gt;
+ &lt;/body&gt;
+&lt;/html&gt;</span>&nbsp;<br></pre>
+</div>
+mclg <br>
+<div id="l-o-g-container">
+  <pre id="l-o-g"></pre>
+</div>
+
+<script>
+ 
+(function (logger) {
+    console.old = console.log;
+    console.log = function () {
+        var output = "", arg, i;
+
+        for (i = 0; i < arguments.length; i++) {
+            arg = arguments[i];
+            output += "<span class=\"log-" + (typeof arg) + "\">";
+
+            if (
+                typeof arg === "object" &&
+                typeof JSON === "object" &&
+                typeof JSON.stringify === "function"
+            ) {
+            	str= JSON.stringify(arg);   
+                output +=  str.replace(/,/g ,',\n').replace(/{/g ,'{\n').replace(/}/g ,'\n}');   
+            } else {
+                output += arg;   
+            }
+
+            output += "</span>&nbsp;";
+        }
+
+        logger.innerHTML += output + "<br>";
+        console.old.apply(undefined, arguments);
+    };
+})(document.getElementById("log"));
+
+mclg()
+// Testing
+var obj=  { a:"bhhjn",
+
+c:"jhgn",
+
+
+b:"bhgbb" }
+console.log(obj)
+console.log("Hi!", {a:3, b:6}, 42, true);
+console.log("Multiple", "arguments", "here");
+
+console.log(null, undefined);
+//for now console.old("Eyy that's the old and boring one.",6);
+console.log('How', true, new Date());
+console.log("5986",7.5)
+console.log("ok",7.5)
+console.log("Hi!", {a:3, b:6}, 42, true);
+console.log("Multiple", "arguments", "here");
+ 
+ 
+console.log(null, undefined);
+//for now console.old("Eyy that's the old and boring one.",6);
+console.log('How', true, new Date());
+console.log("5986",7.5)
+console.log("ok",7.5)
+console.log("Hi!", {a:3, b:6}, 42, true);
+console.log("Multiple", "arguments", "here");
+
+console.log(null, undefined);
+//for now console.old("Eyy that's the old and boring one.",6);
+console.log('How', true, new Date());
+console.log("5986",7.5)
+console.log("ok",7.5)
+ </script>
+ 
+</body>
+</html>
