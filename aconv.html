@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head></head><body>
+	
+  <label for="apis">Choose Api-key:</label>
+  <select onchange="apiChanger()" id="apikeyid">
+    <option value="b7edfaf90d263ca2fa3f4e53955457d4">AAzmAjz</option>
+    <option value="780093812a434ebdcadb2d4699d2c1bf">Redmi3s</option>
+    <option value="e15904361047a56744929610c1a4aac7">azmbtv1</option>
+    <option value="a95bbee2689cb3e4c182ba9581d7cced">azmbtv1 a</option>
+    <option value="56e8fb19b64dd420ca231c2b99fc4f7e">azmbtv1 b</option>
+    <option value="0cc7f17a43ad59f132de785d3170c6a3">z.a.92 master</option>
+    <option value="16251f05d11b9353e1f22a568ddefb62">z.a.92 audio</option>
+   <option value="dfd69717bb1ae5eeac94703d232bfbd8">ma9412</option>
+   <option value="65353680f9db7a98b103d0628833a225">Nak btv</option>
+    <option value="ff4274a6b8d3954e1655960eab277445">zj26</option>
+    <option selected="" value="ccfb79d12e0e90b7fc47726f52c98cda">Otus</option>
+</select>
+<span id="showclktop" style="margin-left:5px;font-size: 12px;color:darkgreen;"></span>
+<span id="showlktop" style="margin-left:0px;font-size: 12px;color:darkblue;"></span>
+  <div style="margin-top:8px;font-size: 15px;color:red;" id="spent"></div>
+  <div style="font-size: 13px;" id="dvst"></div>
+  <div style="font-size: 14px;" id="res"></div> 
+  <div style="margin-top:8px;font-size: 14px;" id="ipdiv"> Input: <br> </div>
+  <div style="margin-top:8px;margin-bottom:8px;font-size: 14px;" id="opdiv">  Output: <br> </div>
+  <textarea style="height: 200px;width:320px" onkeyup="lkcount(this,'showlk')" onpaste="lkcount(this,'showlk')" oncut="lkcount(this,'showlk')" id="lk" class="textarea" placeholder="Enter File Url(s).."></textarea>
+  <input type="button" onclick="getCheck();" value="check">
+  	<input type="button" onclick="postJob();" value="post">
+	<span id="showlk" style="margin-left:10px;font-size: 12px;color:darkblue;"></span>
+  <span id="showclk" style="margin-left:20px;font-size: 12px;color:darkgreen;"></span>
+    <div style="font-size: 15px;color:red;" id="spent2"></div>
+  <textarea style="height: 200px;width:320px" id="cids" class="textarea" placeholder="ids File Url(s).."></textarea>
+  <textarea style="height: 200px;width:320px" id="clk" class="textarea" placeholder="c File Url(s).."></textarea>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+    function readableBytes(bytes) {
+      var i = Math.floor(Math.log(bytes) / Math.log(1024)),
+      sizes = ['B','KB','MB','GB','TB','PB','EB','ZB','YB'];
+      return (bytes / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + sizes[i];
+    }
+    var starr = [];
+    var unarr = [];
+    var stcolor = { completed:"darkgreen", processing:"darkblue", downloading:"grey", failed:"darkred" }
+    var apikey = "b7edfaf90d263ca2fa3f4e53955457d4"
+    apiChanger()
+    function apiChanger() {
+    //	res.innerHTML=readableBytes(6442450944)
+      apikey = apikeyid.value
+    }
+
+function lkcount($this,sno) {
+	setTimeout(() => {
+		var string=$this.value
+        var urllinks = string.split(/[ ,\n]+/).filter(Boolean);
+      if (urllinks.length === 0){
+       document.getElementById(sno).innerText = ""       
+       document.getElementById(sno+"top").innerText = ""       
+    } else{
+      document.getElementById(sno).innerHTML = ` <b> ${urllinks.length} </b> link(s)  `   
+      document.getElementById(sno+"top").innerHTML = ` <b> ${urllinks.length} </b> link(s) `   
+}
+  },10)
+  }
+  
+  
+
+    function getCheck() {
+      var textarea = document.querySelectorAll(".textarea");
+      var lkField = textarea[0].value;
+      var links = lkField.split(/[ ,\n]+/).filter(Boolean);
+
+      var jdarr = []
+      res.innerHTML = '';
+
+      res.innerHTML += `<b>Total ${links.length} link(s) </b><br><hr>`;
+      var i = 0
+      dvst.innerHTML = ""
+      links.forEach(item => {
+        jdarr.push(item)
+        res.innerHTML += ` <b> ${i+1} ) </b>  ${item} <br> `;
+        //  starr["st"+i]="processing job  "+i
+        //     dvst.innerHTML += ` Status : loading <br> `
+        //    dvst.innerHTML += ` <div id= st${i}  > st${i} </div> `
+        i++
+      })
+
+      //    res.innerHTML += " <br> ";
+
+      return(jdarr)
+    }
+
+
+
+
+
+
+   //   check()
+
+    function check(jobId) {
+      // mul var jobId = "6c8e49ab-41a6-4767-ae5b-b261b8c71da6"
+      //   var jobId = "5bdfc0e1-9a05-400c-ac36-670e42e6739b"
+     // starr[jobId] = 'processing..'
+
+      var myInterval = setInterval(() => {
+        if (starr[jobId] != 'completed') {
+          if (starr[jobId] == 'failed') {
+            clearInterval(myInterval);
+            return;
+          }
+          chkStatus(jobId)
+          //   console.log(status)
+        } else {
+          //  res.innerHTML += starr[jobId]
+          clearInterval(myInterval);
+          return;
+        }
+
+      },
+        3200);
+    }
+    
+  //   jobId="84522a8f-ad49-4ae2-bc0a-642bfcf83968"
+  //   starr[jobId] = "downloading"
+    // chkStatus(jobId)
+    function chkStatus(jobId) {
+      $.ajax({
+        method: 'get',
+        url: "https://api2.online-convert.com/jobs/" + jobId,
+        dataType: "json",
+        headers: {
+          "x-oc-api-key": apikey,
+          "content-type": "application/json",
+          "cache-control": "no-cache",
+        },
+        success: function (data) {
+        	
+          console.log(data);
+       var stdv = document.getElementById(jobId);         
+     //     var stdv = document.getElementById("res");         
+          starr[jobId] = data.status.code //imp before
+          
+          if (starr[jobId] == 'failed' && (data.errors)[0].code==50) {
+          stdv.innerHTML = 'Status : <b style=color:'+stcolor[starr[jobId]]+';>'+starr[jobId]+'</b>  '+unarr[jobId] +" Size : "+ readableBytes((data.input)[0].size)
+          }else
+          stdv.innerHTML = 'Status : <b style=color:'+stcolor[starr[jobId]]+';>'+starr[jobId]+'</b>  '+unarr[jobId]  
+          
+          
+          if (starr[jobId] == 'completed') {
+          
+           input = data.input
+            output = data.output
+
+            input.forEach(ele=> {
+              ipdiv.innerHTML += ` ${ele.filename} : ${readableBytes(ele.size)} <br>  `
+            })
+            output.forEach(ele=> {
+              opdiv.innerHTML += ` ${ele.filename} : ${readableBytes(ele.size)} <br>` // <a href = "#" >${ele.uri}</a>  <br>  `
+              clk.value += `${ele.uri},` // linebreak
+            })
+lkcount(document.getElementById("clk"),"showclk")
+          }
+        },
+        error: function (data) {
+        	console.log("error")
+          console.log(data)
+          res.innerHTML = '';
+          var stdv = document.getElementById(jobId);
+          ele=(data.input)[0]
+            stdv.innerHTML= ` ${ele.filename} : ${readableBytes(ele.size)} <br>  `
+          spent.innerHTML = ` <br>${(data.errors)[0].message} <br> <br>`
+          spent2.innerHTML = ` <br>${(data.errors)[0].message} <br> <br>`
+        }
+
+        //   console.log(data);
+
+
+      })
+
+    }
+
+    function postJob() {
+      var links = getCheck()
+      links.forEach(url => {
+        send(url)
+      })
+      //    res.innerHTML = ""
+    }
+
+    function send(url) {
+      var para = JSON.stringify({
+        "input": [{
+          "type": "remote",
+          "source": url
+        }],
+        "conversion": [{
+          "options": {
+            "allow_multiple_outputs": true,
+            "frequency": 22050,
+            "audio_bitrate": 32,
+            "channels": "mono"
+          },
+          "target": "mp3",
+          "category": "audio"
+        }]
+      });
+      res.innerHTML = 'posting….';
+      spent.innerHTML = '';
+      spent2.innerHTML = '';
+      $.ajax({
+        method: 'post',
+        url: "https://api2.online-convert.com/jobs",
+        data: para,
+        dataType: "json",
+        headers: {
+          "x-oc-api-key": apikey,
+          "content-type": "application/json",
+          "cache-control": "no-cache",
+        },
+        success: function (data) {
+          console.log(data)
+          unarr[data.id] = url.split("/").pop()
+          starr[data.id] = data.status.code
+          dvst.innerHTML += ` <div id= ${data.id} >Status : ${data.status.code}</div> `
+          cids.value += `${data.id}, `
+          check(data.id)
+          res.innerHTML = ""
+          //      res.innerHTML += JSON.stringify(data)+" <br> "
+          // console.log(data);
+        },
+        error: function (data) {
+          console.log(data)
+          res.innerHTML = '';
+          spent.innerHTML = `<br> ${(data.responseJSON).message} <br><br>`
+          spent2.innerHTML = `<br> ${(data.responseJSON).message} <br><br>`
+        }
+      })
+
+    }
+
+    /*
+{
+  "conversion": [
+    {
+      "options": {
+       "allow_multiple_outputs": true,
+        "frequency": 22050,
+        "audio_bitrate": 32,
+        "channels": "mono"
+      },
+      "target": "mp3",
+      "category": "audio"
+    }
+  ],
+  "input": [
+    {
+      "type": "remote",
+      "source": "https://bayyinahtv-website.s3.us-east-1.amazonaws.com/audios/4196.mp3"
+    },
+{
+      "type": "remote",
+      "source": "https://bayyinahtv-website.s3.us-east-1.amazonaws.com/audios/4198.mp3"
+    }
+  ]
+}
+ */
+ /*
+    {
+ id":"84522a8f-ad49-4ae2-bc0a-642bfcf83968",
+"token":"7d3c4f4f01aa96392463fe17238f9fab",
+"type":"job",
+"status":{
+"code":"failed",
+"info":"The file has not been converted due to errors."
+},
+"errors":[{
+"source":"input",
+"id_source":"468995ff-6e3d-4713-923f-7936b163b4b8",
+"code":50,
+"message":"The file could not be downloaded by our servers. You do not have permissions to convert files of this size. Please upgrade your account."
+}],
+"warnings":[],
+"process":true,
+"fail_on_input_error":true,
+"fail_on_conversion_error":true,
+"conversion":[{
+"id":"c2515192-4eb4-41a8-a48e-73cc488565bb",
+"target":"mp3",
+"category":"audio",
+"options":{
+"allow_multiple_outputs":true,
+"frequency":22050,
+"audio_bitrate":32,
+"channels":"mono",
+"audio_vbr":null,
+"download_password":null,
+"preset":null,
+"normalize":false,
+"start":null,
+"end":null,
+"remove_coverart":false
+},
+"metadata":{
+
+},
+"output_target":[]
+}],
+"input":[{
+"id":"468995ff-6e3d-4713-923f-7936b163b4b8",
+"type":"remote",
+"status":"failed",
+"source":"https://bayyinahtv-website.s3.us-east-1.amazonaws.com/audios/3990.mp3",
+"engine":"auto",
+"filename":"",
+"size":116341774,   
+   … 
+  }  
+  
+     */
+  </script>
+ 
+
+</body>
+</html>
