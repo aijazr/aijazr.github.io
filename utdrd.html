@@ -88,6 +88,7 @@ body {
    <th>UPS</th>
   </thead>
   <tbody> 
+
 </tbody>
  </table>
 
@@ -167,7 +168,9 @@ var str = ` <tr id="${snapshot.key}" >
 database.ref('files/').on('child_changed', function(snapshot) {
 	console.log("changed",snapshot)
 	console.log(snapshot.key,snapshot.val())
-	 $("#"+snapshot.key).find('.status').html(snapshot.val().status)
+	var status = snapshot.val().status
+	 $("#"+snapshot.key).find('.status').html("<b>"+ status+"</b>" )
+	$("#"+snapshot.key).find('.status').css("color",stcolor[status])
 	$("#"+snapshot.key).find('.dls').html(snapshot.val().dls)
 	$("#"+snapshot.key).find('.ups').html(snapshot.val().ups)
     });
