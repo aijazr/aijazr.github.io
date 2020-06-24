@@ -53,6 +53,13 @@ input[type=text] {
       background-color: #0f5b79;
       cursor: progress;
     }
+    
+td{
+font-size: 14px;
+}
+.key{
+font-size: 10px;
+}
 </style>
  </head>
  <body>  
@@ -66,7 +73,7 @@ input[type=text] {
  </div>
 <table style="margin-top: 5px;" id="tab" border="1">
   <thead>
-   <th>Key</th>
+   <th>Time</th>
    <th>File Name</th>
    <th>Status</th>
    <th>DLS</th>
@@ -99,16 +106,16 @@ input[type=text] {
  	
 var database = firebase.database();
 var refer = database.ref('files/');
-var f = ""
+ var stcolor = { Uploaded:"darkgreen", Uploading:"darkblue", Downloading:"black", DownloadFailed:"darkred",UploadFailed:"darkred" }
 function dosomething(){
-	
-
 var f = document.querySelector("#filename").value
 var s = document.querySelector("#status").value
-var  timestamp = Date.now().toString()
+var  timestamp = Date.now()
 database.ref('files/'+timestamp).set ({
 	filename:f,
-    status: s
+    status: s,
+    dls :"NA",
+	ups : "NA"
 });
 
 }
@@ -136,10 +143,12 @@ refer.on('child_added', function(snapshot) {
 //   var childData = childSnapshot.val();
    
   //  (res).innerHTML += snapshot.key +" " +  JSON.stringify(snapshot.val() ) +"<br>"
-  var str = ` <tr id="${snapshot.key}" >
-   <td> ${snapshot.key} </td>
+var d = Date("1592964786879").toLocaleString().split(" ")[4]
+var status = snapshot.val().status
+var str = ` <tr id="${snapshot.key}" >
+   <td class="key"> ${d} </td>
    <td class="filename"> ${snapshot.val().filename} </td>
-   <td class="status" > ${snapshot.val().status} </td>
+   <td class="status" style="color: ${stcolor[status]} ;" ><b>${status}</b></td>
    <td class="dls" > ${snapshot.val().dls} </td>
    <td class="ups" > ${snapshot.val().ups} </td>
   </tr> `
@@ -158,7 +167,6 @@ database.ref('files/').on('child_changed', function(snapshot) {
 database.ref('files/').on('child_removed', function(snapshot) {
 	  $("#"+snapshot.key).remove()
     });
-
 
 // console.log(database)
 </script>
