@@ -9,8 +9,9 @@
  
 <table style="margin-top: 5px;" id="tab" border="1">
   <thead>
-   <td>File Name</td>
-   <td>Status</td>
+   <th>Key</th>
+   <th>File Name</th>
+   <th>Status</th>
   </thead>
   <tbody> 
 
@@ -20,7 +21,7 @@
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-database.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
   // Your web app's Firebase configuration
   var firebaseConfig = {
@@ -53,10 +54,12 @@ database.ref('files/'+f).set ({
 // child_changed child_removed child_added
 refer.on('child_added', function(snapshot) {
   //  (res).innerHTML += snapshot.key +" " +  JSON.stringify(snapshot.val() ) +"<br>"
-  document.querySelector("tbody").innerHTML += ` <tr>
+  var str = ` <tr>
+   <td> ${snapshot.key} </td>
    <td> ${snapshot.val().filename} </td>
    <td id="${snapshot.key}" > ${snapshot.val().status} </td>
   </tr> `
+  $("tbody").prepend(str)
     });
 
 database.ref('files/').on('child_changed', function(snapshot) {
@@ -68,6 +71,5 @@ database.ref('files/').on('child_changed', function(snapshot) {
 
 // console.log(database)
 </script>
-
 </body>
  </html>
