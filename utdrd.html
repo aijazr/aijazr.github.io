@@ -1,0 +1,166 @@
+<html>
+<head> 
+<style> 
+table {
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 15px;
+    }
+
+    table td,
+    table th {
+      border: 1px solid #ddd;
+      padding: 4px;
+    }
+
+      table th {
+      background-color: #0e739b;
+      color: white;
+    }
+table td {
+      text-align: center;
+    }
+
+input[type=text] {     
+      padding: 3px;
+      border: 1px solid #ccc;
+      margin-top: 6px;
+      resize: vertical;
+      border-radius: 5px;
+    }
+    input[type=text]:focus {
+      border-color: #0f5b79;
+      border-radius: 6px;
+      outline: 0 !important;
+    }
+
+    input[type=button] {
+      background-color: #0e739b;
+      color: white;
+      padding: 4px 8px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      outline: 0 !important;
+      font-size: 14px;
+    }
+    input[type=button]:hover {
+      background-color: #0f5b79;
+    }
+
+    input[type=button]:disabled {
+      background-color: #0f5b79;
+      cursor: progress;
+    }
+</style>
+ </head>
+ <body>  
+ <div style="margin-left: 50px;" >
+<input style="margin-top: 50px;" type="text" id="filename" >  <br>
+<input style="margin-top: 5px;" type="text" id="status" >  <br>
+<div style="margin-top: 5px;" >
+<input type="button" onclick="dosomething();"  value="submit">
+ <input type="button" onclick="update();"  value="Update">
+ <input type="button" onclick="clean();"  value="Clean">
+ </div>
+<table style="margin-top: 5px;" id="tab" border="1">
+  <thead>
+   <th>Key</th>
+   <th>File Name</th>
+   <th>Status</th>
+   <th>DLS</th>
+   <th>UPS</th>
+  </thead>
+  <tbody> 
+
+</tbody>
+ </table>
+</div>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-database.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyA8ouGGj6kQ-8iPulYkUmtouCiP3xazrG4",
+    authDomain: "ajz-heroku.firebaseapp.com",
+    databaseURL: "https://ajz-heroku.firebaseio.com",
+    projectId: "ajz-heroku",
+    storageBucket: "ajz-heroku.appspot.com",
+    messagingSenderId: "830685316269",
+    appId: "1:830685316269:web:2179a27640b20d0658b224"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>  
+ <script >
+ 	
+var database = firebase.database();
+var refer = database.ref('files/');
+var f = ""
+function dosomething(){
+	
+
+var f = document.querySelector("#filename").value
+var s = document.querySelector("#status").value
+var  timestamp = Date.now().toString()
+database.ref('files/'+timestamp).set ({
+	filename:f,
+    status: s
+});
+
+}
+
+function update(){
+var f = document.querySelector("#filename").value
+var s = document.querySelector("#status").value
+database.ref('files/'+f).set ({
+	filename:f,
+    status: s
+});
+
+}
+
+function clean(){
+database.ref('files/').set ({});
+}
+
+
+// child_changed child_removed child_added
+refer.on('child_added', function(snapshot) {
+	// console.log(parentsnapshot)
+	// parentsnapshot.forEach(function(snapshot) {
+//   var childKey = childSnapshot.key;
+//   var childData = childSnapshot.val();
+   
+  //  (res).innerHTML += snapshot.key +" " +  JSON.stringify(snapshot.val() ) +"<br>"
+  var str = ` <tr id="${snapshot.key}" >
+   <td> ${snapshot.key} </td>
+   <td class="filename"> ${snapshot.val().filename} </td>
+   <td class="status" > ${snapshot.val().status} </td>
+   <td class="dls" > ${snapshot.val().dls} </td>
+   <td class="ups" > ${snapshot.val().ups} </td>
+  </tr> `
+  $("tbody").prepend(str)
+    });
+ //   });
+
+database.ref('files/').on('child_changed', function(snapshot) {
+	console.log("changed",snapshot)
+	console.log(snapshot.key,snapshot.val())
+	 $("#"+snapshot.key).find('.status').html(snapshot.val().status)
+	$("#"+snapshot.key).find('.dls').html(snapshot.val().dls)
+	$("#"+snapshot.key).find('.ups').html(snapshot.val().ups)
+    });
+
+database.ref('files/').on('child_removed', function(snapshot) {
+	  $("#"+snapshot.key).remove()
+    });
+
+
+// console.log(database)
+</script>
+</body>
+ </html>
