@@ -6,6 +6,8 @@
 <input style="margin-top: 50px;" type="text" id="filename" > 	<br>
 	<input style="margin-top: 5px;" type="text" id="status" >  <br>
 <input type="button" onclick="dosomething();"  value="submit">
+ <input type="button" onclick="update();"  value="Update">
+ <input type="button" onclick="clean();"  value="Clean">
  
 <table style="margin-top: 5px;" id="tab" border="1">
   <thead>
@@ -42,17 +44,40 @@ var database = firebase.database();
 var refer = database.ref('files/');
 var f = ""
 function dosomething(){
+	
+
+var f = document.querySelector("#filename").value
+var s = document.querySelector("#status").value
+var  timestamp = Date.now().toString()
+database.ref('files/'+timestamp).set ({
+	filename:f,
+    status: s
+});
+
+}
+
+function update(){
 var f = document.querySelector("#filename").value
 var s = document.querySelector("#status").value
 database.ref('files/'+f).set ({
-   status: s
+	filename:f,
+    status: s
 });
 
+}
+
+function clean(){
+database.ref('files/').set ({});
 }
 
 
 // child_changed child_removed child_added
 refer.on('child_added', function(snapshot) {
+	// console.log(parentsnapshot)
+	// parentsnapshot.forEach(function(snapshot) {
+//   var childKey = childSnapshot.key;
+//   var childData = childSnapshot.val();
+   
   //  (res).innerHTML += snapshot.key +" " +  JSON.stringify(snapshot.val() ) +"<br>"
   var str = ` <tr>
    <td> ${snapshot.key} </td>
@@ -61,11 +86,16 @@ refer.on('child_added', function(snapshot) {
   </tr> `
   $("tbody").prepend(str)
     });
+ //   });
 
 database.ref('files/').on('child_changed', function(snapshot) {
-	// console.log(snapshot) // snapshot.key +" " + 
-  //  (res).innerHTML += snapshot.key +" " +  JSON.stringify(snapshot.val() ) +"<br>"
-  document.querySelector("#"+snapshot.key).innerHTML = snapshot.val().status
+	console.log("changed",snapshot)
+	console.log(snapshot.key,snapshot.val())
+	  document.getElementById(snapshot.key).innerHTML = snapshot.val().status
+    });
+
+database.ref('files/').on('child_removed', function(snapshot) {
+	  $("#"+snapshot.key).parent().remove()
     });
 
 
