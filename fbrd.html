@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html>
+<head> 
+	
+<style> 
+table {
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 10px;
+    }
+
+    table td,
+    table th {
+      border: 1px solid #ddd;
+      padding: 4px;
+    }
+
+      table th {
+      background-color: #0e739b;
+      color: white;
+    }
+table td {
+      text-align: center;
+    }
+
+input[type=text] {     
+      padding: 3px;
+      border: 1px solid #ccc;
+      margin-top: 6px;
+      resize: vertical;
+      border-radius: 5px;
+    }
+    input[type=text]:focus {
+      border-color: #0f5b79;
+      border-radius: 6px;
+      outline: 0 !important;
+    }
+
+    input[type=button] {
+      background-color: #0e739b;
+      color: white;
+      padding: 4px 8px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      outline: 0 !important;
+      font-size: 14px;
+    }
+    input[type=button]:hover {
+      background-color: #0f5b79;
+    }
+
+    input[type=button]:disabled {
+      background-color: #0f5b79;
+      cursor: progress;
+    }
+    
+
+body {
+  display:flex; flex-direction:row; justify-content:center;
+  min-height:100vh;
+}
+
+</style>
+ </head>
+ <body>  
+ <div> 
+ 	<div style="margin-right: 10px;text-align: center"> 
+ <input placeholder="time" style="margin-top: 5px;" type="text" id="time">  <br>
+<input placeholder="filename" style="margin-top: 5px;" type="text" id="filename">  <br>
+<input placeholder="status" style="margin-top: 5px;" type="text" id="status">  <br>
+<input placeholder="dls" style="margin-top: 5px;" type="text" id="dls">  <br>
+<input placeholder="ups" style="margin-top: 5px;" type="text" id="ups">  <br>
+<div style="margin-top: 5px;">
+<input type="button" onclick="dosomething();" value="submit">
+ <input type="button" value="Update">
+ <input type="button" onclick="clean();" value="Clean">
+ </div>
+</div>
+<table style="margin-top: 15px;" id="tab" border="1">
+  <thead>
+   <tr><th style="padding-left: 9px;" onclick="$('.date').toggle()"> Timestamp </th>
+   <th>File Name</th>
+   <th>Status</th>
+   <th>DLS</th>
+   <th>UPS</th>
+  </tr></thead>
+  <tbody> 
+
+ <tr id="1593231011951">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN1_1593231011951</span></td>
+   <td class="filename">  Seerah_episode_14.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 40.66 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011953">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN2_1593231011953</span></td>
+   <td class="filename">  Seerah_episode_15.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 45.44 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011954">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN3_1593231011954</span></td>
+   <td class="filename">  Seerah_episode_16.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 49 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011955">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN4_1593231011955</span></td>
+   <td class="filename">  Seerah_episode_17.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 54.12 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011956">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN5_1593231011956</span></td>
+   <td class="filename">  Seerah_episode_18.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 30.24 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011957">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN6_1593231011957</span></td>
+   <td class="filename">  Seerah_episode_19.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 30.98 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011959">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN8_1593231011959</span></td>
+   <td class="filename">  Seerah_episode_21.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 58.78 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011960">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN9_1593231011960</span></td>
+   <td class="filename">  Seerah_episode_22.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 51.29 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011961">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN10_1593231011961</span></td>
+   <td class="filename">  seerah_episode_7.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 57.32 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011962">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN11_1593231011962</span></td>
+   <td class="filename">  seerah_episode_8.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 70.58 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011963">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN12_1593231011963</span></td>
+   <td class="filename">  seerah_episode_9.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 47.97 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011964">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN14_1593231011964</span></td>
+   <td class="filename">  seerah_episode_11.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 34.77 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011965">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN15_1593231011965</span></td>
+   <td class="filename">  seerah_episode_12.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 43.32 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011966">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN16_1593231011966</span></td>
+   <td class="filename">  seerah_episode_13.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 42.8 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011967">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN17_1593231011967</span></td>
+   <td class="filename">  seerah_episode_26.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 79.17 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011968">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN19_1593231011968</span></td>
+   <td class="filename">  seerah_episode_30.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 40.97 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011969">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN21_1593231011969</span></td>
+   <td class="filename">  seerah_episode_32.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 37.65 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011970">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN22_1593231011970</span></td>
+   <td class="filename">  seerah_episode_33.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 43.03 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011971">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN23_1593231011971</span></td>
+   <td class="filename">  seerah_episode_35.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 50.64 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011972">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN24_1593231011972</span></td>
+   <td class="filename">  seerah_episode_38.mp3 </td>
+   <td class="status" style="color: darkgreen ;"><b>Uploaded</b></td>
+   <td class="dls"> 14.76 MB </td>
+   <td class="ups"> 4.92 MB </td>
+  </tr>  <tr id="1593231011973">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN26_1593231011973</span></td>
+   <td class="filename">  seerah_episode_40.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 39.03 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011974">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN28_1593231011974</span></td>
+   <td class="filename">  seerah_episode_43.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 46.12 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011975">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN29_1593231011975</span></td>
+   <td class="filename">  seerah_episode_44.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 40.05 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011976">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN30_1593231011976</span></td>
+   <td class="filename">  seerah_episode_45.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 39.19 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011977">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN32_1593231011977</span></td>
+   <td class="filename">  seerah_episode_47.mp3 </td>
+   <td class="status" style="color: darkgreen ;"><b>Uploaded</b></td>
+   <td class="dls"> 27.87 MB </td>
+   <td class="ups"> 9.25 MB </td>
+  </tr>  <tr id="1593231011978">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN34_1593231011978</span></td>
+   <td class="filename">  seerah_episode_49.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 43.43 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011979">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN35_1593231011979</span></td>
+   <td class="filename">  seerah_episode_50.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 36.05 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011980">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN36_1593231011980</span></td>
+   <td class="filename">  seerah_episode_51.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 40.38 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011981">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN37_1593231011981</span></td>
+   <td class="filename">  seerah_episode_52.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 29.01 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011982">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN38_1593231011982</span></td>
+   <td class="filename">  seerah_episode_53.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 28.99 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011984">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN40_1593231011984</span></td>
+   <td class="filename">  seerah_episode_55.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 35.52 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011986">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN41_1593231011986</span></td>
+   <td class="filename">  seerah_episode_56.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 41.92 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011988">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN42_1593231011988</span></td>
+   <td class="filename">  seerah_episode_57.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 38.08 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011989">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN43_1593231011989</span></td>
+   <td class="filename">  seerah_episode_58.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 32.54 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011992">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN44_1593231011992</span></td>
+   <td class="filename">  seerah_episode_59.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 38.49 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011993">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN46_1593231011993</span></td>
+   <td class="filename">  seerah_episode_61.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 35.63 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011994">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN47_1593231011994</span></td>
+   <td class="filename">  seerah_episode_62.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 33.97 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011995">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN49_1593231011995</span></td>
+   <td class="filename">  seerah_episode_64.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 30.77 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011996">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN50_1593231011996</span></td>
+   <td class="filename">  seerah_episode_65.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 34.94 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011997">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN51_1593231011997</span></td>
+   <td class="filename">  seerah_episode_66.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 33.86 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231011998">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN53_1593231011998</span></td>
+   <td class="filename">  seerah_episode_68.mp3 </td>
+   <td class="status" style="color: darkgreen ;"><b>Uploaded</b></td>
+   <td class="dls"> 30.59 MB </td>
+   <td class="ups"> 10.11 MB </td>
+  </tr>  <tr id="1593231011999">
+   <td class="key"><span class="time">9:40:11 AM</span><br><span class="date" style="display: none;">SN55_1593231011999</span></td>
+   <td class="filename">  seerah_episode_70.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 38.11 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012000">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN56_1593231012000</span></td>
+   <td class="filename">  seerah_episode_71.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 45.26 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012002">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN57_1593231012002</span></td>
+   <td class="filename">  seerah_episode_72.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 38.03 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012003">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN58_1593231012003</span></td>
+   <td class="filename">  seerah_episode_73.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 32.31 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012008">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN59_1593231012008</span></td>
+   <td class="filename">  seerah_episode_74.mp3 </td>
+   <td class="status" style="color: darkgreen ;"><b>Uploaded</b></td>
+   <td class="dls"> 27.79 MB </td>
+   <td class="ups"> 9.18 MB </td>
+  </tr>  <tr id="1593231012009">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN60_1593231012009</span></td>
+   <td class="filename">  seerah_episode_75.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 31.34 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012010">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN62_1593231012010</span></td>
+   <td class="filename">  seerah_episode_77.mp3 </td>
+   <td class="status" style="color: darkgreen ;"><b>Uploaded</b></td>
+   <td class="dls"> 24.23 MB </td>
+   <td class="ups"> 7.99 MB </td>
+  </tr>  <tr id="1593231012011">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN63_1593231012011</span></td>
+   <td class="filename">  seerah_episode_78.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 40.04 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012012">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN65_1593231012012</span></td>
+   <td class="filename">  seerah_episode_80.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 29.28 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012013">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN66_1593231012013</span></td>
+   <td class="filename">  seerah_episode_81.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 35.34 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012014">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN67_1593231012014</span></td>
+   <td class="filename">  seerah_episode_82.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 30.77 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012015">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN69_1593231012015</span></td>
+   <td class="filename">  seerah_episode_84.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 33.99 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012016">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN70_1593231012016</span></td>
+   <td class="filename">  seerah_episode_85.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 33 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012017">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN72_1593231012017</span></td>
+   <td class="filename">  seerah_episode_87.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 38.16 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012018">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN74_1593231012018</span></td>
+   <td class="filename">  seerah_episode_89.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 38.13 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012019">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN75_1593231012019</span></td>
+   <td class="filename">  seerah_episode_90.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 42.17 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012020">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN76_1593231012020</span></td>
+   <td class="filename">  seerah_episode_91.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 45.34 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012022">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN77_1593231012022</span></td>
+   <td class="filename">  seerah_episode_92.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 43.69 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012024">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN78_1593231012024</span></td>
+   <td class="filename">  seerah_episode_93.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 44.94 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012025">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN79_1593231012025</span></td>
+   <td class="filename">  seerah_episode_94.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 44.8 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012026">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN80_1593231012026</span></td>
+   <td class="filename">  seerah_episode_95.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 47.06 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012029">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN81_1593231012029</span></td>
+   <td class="filename">  seerah_episode_96.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 50.09 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012030">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN82_1593231012030</span></td>
+   <td class="filename">  seerah_episode_97.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 47.62 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012031">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN83_1593231012031</span></td>
+   <td class="filename">  seerah_episode_98.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 35.37 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012035">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN84_1593231012035</span></td>
+   <td class="filename">  seerah_episode_99.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 46.26 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012036">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN86_1593231012036</span></td>
+   <td class="filename">  seerah_episode_101.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 30.39 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012037">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN87_1593231012037</span></td>
+   <td class="filename">  seerah_episode_102.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 50.23 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012038">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN88_1593231012038</span></td>
+   <td class="filename">  seerah_episode_103.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 63.73 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012041">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN89_1593231012041</span></td>
+   <td class="filename">  seerah_episode_104.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 49.61 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012042">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN90_1593231012042</span></td>
+   <td class="filename">  seerah_episode_105.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 40.57 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012044">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN91_1593231012044</span></td>
+   <td class="filename">  seerah_episode_106.mp3 </td>
+   <td class="status" style="color: darkgreen ;"><b>Uploaded</b></td>
+   <td class="dls"> 20 MB </td>
+   <td class="ups"> 4.98 MB </td>
+  </tr>  <tr id="1593231012045">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN92_1593231012045</span></td>
+   <td class="filename">  seerah_episode_107.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 50.05 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012046">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN93_1593231012046</span></td>
+   <td class="filename">  seerah_episode_108.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 43.16 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012048">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN94_1593231012048</span></td>
+   <td class="filename">  seerah_episode_109.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 41.75 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012050">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN95_1593231012050</span></td>
+   <td class="filename">  seerah_episode_110.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 45.31 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012051">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN96_1593231012051</span></td>
+   <td class="filename">  seerah_episode_111.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 38.33 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012052">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN97_1593231012052</span></td>
+   <td class="filename">  seerah_episode_112.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 40.4 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012054">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN98_1593231012054</span></td>
+   <td class="filename">  seerah_episode_113.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 47.67 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012059">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN99_1593231012059</span></td>
+   <td class="filename">  seerah_episode_114.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 41.67 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012060">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN100_1593231012060</span></td>
+   <td class="filename">  seerah_episode_115.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 45.13 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012062">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN101_1593231012062</span></td>
+   <td class="filename">  seerah_episode_116.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 44.62 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012063">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN102_1593231012063</span></td>
+   <td class="filename">  seerah_episode_117.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 43.87 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012064">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN103_1593231012064</span></td>
+   <td class="filename">  seerah_episode_118.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 51.16 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012065">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN104_1593231012065</span></td>
+   <td class="filename">  seerah_episode_119.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 50.16 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012068">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN105_1593231012068</span></td>
+   <td class="filename">  seerah_episode_120.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 35.74 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012069">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN106_1593231012069</span></td>
+   <td class="filename">  seerah_episode_121.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 42.69 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012070">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN107_1593231012070</span></td>
+   <td class="filename">  seerah_episode_122.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 55.06 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012071">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN108_1593231012071</span></td>
+   <td class="filename">  seerah_episode_123.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 47.11 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012072">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN109_1593231012072</span></td>
+   <td class="filename">  seerah_episode_124.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 49.07 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012074">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN110_1593231012074</span></td>
+   <td class="filename">  seerah_episode_125.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 49.66 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012075">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN111_1593231012075</span></td>
+   <td class="filename">  seerah_episode_126.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 38.72 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012076">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN112_1593231012076</span></td>
+   <td class="filename">  seerah_episode_127.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 49.22 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012077">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN113_1593231012077</span></td>
+   <td class="filename">  seerah_episode_128.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 41.53 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012078">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN114_1593231012078</span></td>
+   <td class="filename">  seerah_episode_129.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 52.63 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012080">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN115_1593231012080</span></td>
+   <td class="filename">  seerah_episode_130.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 66.65 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012082">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN116_1593231012082</span></td>
+   <td class="filename">  seerah_episode_131.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 49.61 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012083">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN118_1593231012083</span></td>
+   <td class="filename">  seerah_episode_133.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 51.9 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012085">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN119_1593231012085</span></td>
+   <td class="filename">  seerah_episode_134.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 34.17 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012086">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN120_1593231012086</span></td>
+   <td class="filename">  seerah_episode_135.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 51.35 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012087">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN121_1593231012087</span></td>
+   <td class="filename">  seerah_episode_136.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 33.69 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012089">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN122_1593231012089</span></td>
+   <td class="filename">  seerah_episode_137.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 54.23 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012090">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN123_1593231012090</span></td>
+   <td class="filename">  seerah_episode_138.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 41.83 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012091">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN125_1593231012091</span></td>
+   <td class="filename">  seerah_episode_140.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 52.85 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012092">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN127_1593231012092</span></td>
+   <td class="filename">  seerah_episode_142.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 40.09 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012093">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN129_1593231012093</span></td>
+   <td class="filename">  seerah_episode_144.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 46.49 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012094">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN130_1593231012094</span></td>
+   <td class="filename">  seerah_episode_145.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 45.92 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012095">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN131_1593231012095</span></td>
+   <td class="filename">  seerah_episode_146.mp3 </td>
+   <td class="status" style="color: darkgreen ;"><b>Uploaded</b></td>
+   <td class="dls"> 23.57 MB </td>
+   <td class="ups"> 5.87 MB </td>
+  </tr>  <tr id="1593231012096">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN132_1593231012096</span></td>
+   <td class="filename">  seerah_episode_147.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 37.6 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012097">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN133_1593231012097</span></td>
+   <td class="filename">  seerah_episode_148.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 40.66 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012098">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN134_1593231012098</span></td>
+   <td class="filename">  seerah_episode_149.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 43.33 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012099">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN136_1593231012099</span></td>
+   <td class="filename">  seerah_episode_151.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 38.5 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012100">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN138_1593231012100</span></td>
+   <td class="filename">  seerah_episode_153.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 54.91 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012101">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN139_1593231012101</span></td>
+   <td class="filename">  seerah_episode_154.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 50.64 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012102">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN140_1593231012102</span></td>
+   <td class="filename">  seerah_episode_155.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 30.6 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012103">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN142_1593231012103</span></td>
+   <td class="filename">  seerah_episode_157.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 39.2 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012104">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN143_1593231012104</span></td>
+   <td class="filename">  seerah_episode_158.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 38.64 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012105">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN144_1593231012105</span></td>
+   <td class="filename">  seerah_episode_159.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 31.04 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012106">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN145_1593231012106</span></td>
+   <td class="filename">  seerah_episode_160.mp3 </td>
+   <td class="status" style="color: darkgreen ;"><b>Uploaded</b></td>
+   <td class="dls"> 27.98 MB </td>
+   <td class="ups"> 6.96 MB </td>
+  </tr>  <tr id="1593231012107">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN146_1593231012107</span></td>
+   <td class="filename">  seerah_episode_161.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 42.61 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012108">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN147_1593231012108</span></td>
+   <td class="filename">  seerah_episode_162.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 39.93 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012109">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN148_1593231012109</span></td>
+   <td class="filename">  seerah_episode_163.mp3 </td>
+   <td class="status" style="color: darkgreen ;"><b>Uploaded</b></td>
+   <td class="dls"> 27.78 MB </td>
+   <td class="ups"> 6.91 MB </td>
+  </tr>  <tr id="1593231012111">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN149_1593231012111</span></td>
+   <td class="filename">  seerah_episode_164.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 35.94 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012112">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN150_1593231012112</span></td>
+   <td class="filename">  seerah_episode_165.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 35.73 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012126">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN151_1593231012126</span></td>
+   <td class="filename">  seerah_episode_166.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 37.87 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012127">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN152_1593231012127</span></td>
+   <td class="filename">  seerah_episode_167.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 45.17 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012132">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN153_1593231012132</span></td>
+   <td class="filename">  seerah_episode_168.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 34.27 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012134">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN154_1593231012134</span></td>
+   <td class="filename">  seerah_episode_169.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 48.69 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012136">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN155_1593231012136</span></td>
+   <td class="filename">  seerah_episode_170.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 37.97 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012137">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN156_1593231012137</span></td>
+   <td class="filename">  seerah_episode_171.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 43.03 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012138">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN157_1593231012138</span></td>
+   <td class="filename">  seerah_episode_172.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 56.28 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012139">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN158_1593231012139</span></td>
+   <td class="filename">  seerah_episode_173.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 50.78 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012144">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN159_1593231012144</span></td>
+   <td class="filename">  seerah_episode_174.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 38.61 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012145">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN160_1593231012145</span></td>
+   <td class="filename">  seerah_episode_175.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 28.06 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012146">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN161_1593231012146</span></td>
+   <td class="filename">  seerah_episode_176.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 40.83 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012147">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN162_1593231012147</span></td>
+   <td class="filename">  seerah_episode_177.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 52.17 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012148">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN163_1593231012148</span></td>
+   <td class="filename">  seerah_episode_178.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 42.65 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012149">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN164_1593231012149</span></td>
+   <td class="filename">  seerah_episode_179.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 40.78 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012150">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN165_1593231012150</span></td>
+   <td class="filename">  seerah_episode_180.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 31.75 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012152">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN166_1593231012152</span></td>
+   <td class="filename">  seerah_episode_181.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 35.66 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012157">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN167_1593231012157</span></td>
+   <td class="filename">  seerah_episode_182.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 42.14 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012158">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN168_1593231012158</span></td>
+   <td class="filename">  seerah_episode_183.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 41.13 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012160">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN169_1593231012160</span></td>
+   <td class="filename">  seerah_episode_184.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 45.13 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012161">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN170_1593231012161</span></td>
+   <td class="filename">  seerah_episode_185.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 45.2 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012162">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN171_1593231012162</span></td>
+   <td class="filename">  seerah_episode_186.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 40.08 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012163">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN172_1593231012163</span></td>
+   <td class="filename">  seerah_episode_187.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 52.69 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012165">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN173_1593231012165</span></td>
+   <td class="filename">  seerah_episode_188.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 40.34 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012166">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN174_1593231012166</span></td>
+   <td class="filename">  seerah_episode_189.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 45.16 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012168">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN176_1593231012168</span></td>
+   <td class="filename">  seerah_episode_191.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 35.31 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012169">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN177_1593231012169</span></td>
+   <td class="filename">  seerah_episode_192.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 29.19 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012170">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN178_1593231012170</span></td>
+   <td class="filename">  seerah_episode_193.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 39.23 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012171">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN179_1593231012171</span></td>
+   <td class="filename">  seerah_episode_194.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 43.96 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012172">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN180_1593231012172</span></td>
+   <td class="filename">  seerah_episode_195.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 49.43 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012173">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN181_1593231012173</span></td>
+   <td class="filename">  seerah_episode_196.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 52.42 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012174">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN182_1593231012174</span></td>
+   <td class="filename">  seerah_episode_197.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 63.24 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012175">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN183_1593231012175</span></td>
+   <td class="filename">  seerah_episode_198.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 46.3 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012176">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN184_1593231012176</span></td>
+   <td class="filename">  seerah_episode_199.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 68.3 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012181">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN185_1593231012181</span></td>
+   <td class="filename">  seerah_epsiode_27.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 97.89 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012182">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN186_1593231012182</span></td>
+   <td class="filename">  seerah_epsiode_34.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 41.2 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012184">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN187_1593231012184</span></td>
+   <td class="filename">  seerah_epsiode_36.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 39.77 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012185">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN188_1593231012185</span></td>
+   <td class="filename">  seerah_epsiode_37.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 42.92 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012186">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN189_1593231012186</span></td>
+   <td class="filename">  seerah_epsiode_42.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Converting</b></td>
+   <td class="dls"> 32.16 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012187">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN190_1593231012187</span></td>
+   <td class="filename">  seerah_history_of_zamzam.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 64.92 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012188">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN191_1593231012188</span></td>
+   <td class="filename">  seerah_intro_a.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 52.31 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012189">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN193_1593231012189</span></td>
+   <td class="filename">  seerah_monotheism_before_islam.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 63.42 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012190">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN194_1593231012190</span></td>
+   <td class="filename">  seerah_pre_islamic_society_a.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 56.16 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012191">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN195_1593231012191</span></td>
+   <td class="filename">  seerah_pre_islamic_society_b.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 62.3 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012192">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN196_1593231012192</span></td>
+   <td class="filename">  seerah_update.mp3 </td>
+   <td class="status" style="color: darkgreen ;"><b>Uploaded</b></td>
+   <td class="dls"> 3.47 MB </td>
+   <td class="ups"> 849.67 KB </td>
+  </tr>  <tr id="1593231012193">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN197_1593231012193</span></td>
+   <td class="filename">  seerah_episode_23.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 113.38 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012194">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN199_1593231012194</span></td>
+   <td class="filename">  seerah_episode_25.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 127.08 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012195">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN200_1593231012195</span></td>
+   <td class="filename">  seerah_episode_28.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 113.66 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231012196">
+   <td class="key"><span class="time">9:40:12 AM</span><br><span class="date" style="display: none;">SN201_1593231012196</span></td>
+   <td class="filename">  seerah_episode_144.mp3.mp3 </td>
+   <td class="status" style="color: undefined ;"><b>Downloaded</b></td>
+   <td class="dls"> 115.35 MB </td>
+   <td class="ups"> - </td>
+  </tr>  <tr id="1593231915211">
+   <td class="key"><span class="time">9:55:15 AM</span><br><span class="date" style="display: none;">undefined</span></td>
+   <td class="filename">   </td>
+   <td class="status" style="color: undefined ;"><b></b></td>
+   <td class="dls"> undefined </td>
+   <td class="ups"> undefined </td>
+  </tr> </tbody>
+ </table>
+
+</div>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-database.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyA8ouGGj6kQ-8iPulYkUmtouCiP3xazrG4",
+    authDomain: "ajz-heroku.firebaseapp.com",
+    databaseURL: "https://ajz-heroku.firebaseio.com",
+    projectId: "ajz-heroku",
+    storageBucket: "ajz-heroku.appspot.com",
+    messagingSenderId: "830685316269",
+    appId: "1:830685316269:web:2179a27640b20d0658b224"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>  
+ <script>
+ 	
+var database = firebase.database();
+var refer = database.ref('files/');
+ var stcolor = { Uploaded:"darkgreen", Uploading:"darkblue", Downloading:"black", DownloadFailed:"darkred",UploadFailed:"darkred" }
+function dosomething(){
+let f = $("#filename").val()
+let s = $("#status").val()
+let dls = $("#dls").val() || "ok"
+let ups = $("#ups").val()
+let  timestamp = $("#time").val()  //  Date.now()
+
+let object = {
+	filename:f,
+    status: s,
+    dls,
+    ups
+}
+database.ref('files/'+timestamp).set (object);
+}
+
+function update(){
+var f = document.querySelector("#filename").value
+var s = document.querySelector("#status").value
+database.ref('files/'+f).set ({
+	filename:f,
+    status: s
+});
+
+}
+
+function clean(){
+database.ref('files/').set ({});
+}
+
+
+// child_changed child_removed child_added
+database.ref('files/').on('child_added', function(snapshot) {
+let status = snapshot.val().status
+let time =  new Date(parseInt(snapshot.key)).toLocaleTimeString("en-US")
+let str = ` <tr id="${snapshot.key}" >
+   <td class="key"><span class="time">${time}</span><br><span class="date">${snapshot.val().sno}</span></td>
+   <td class="filename">  ${snapshot.val().filename} </td>
+   <td class="status" style="color: ${stcolor[status]} ;" ><b>${status}</b></td>
+   <td class="dls" > ${snapshot.val().dls} </td>
+   <td class="ups" > ${snapshot.val().ups} </td>
+  </tr> `
+  $("tbody").append(str)
+  $(".date").hide()
+    });
+
+database.ref('files/').on('child_changed', function(snapshot) {
+	 console.log("changed",snapshot)
+	 console.log(snapshot.key,snapshot.val())
+	var status = snapshot.val().status
+	 $("#"+snapshot.key).find('.status').html("<b>"+ status+"</b>" )
+	$("#"+snapshot.key).find('.status').css("color",stcolor[status])
+	$("#"+snapshot.key).find('.dls').html(snapshot.val().dls)
+	$("#"+snapshot.key).find('.filename').html(snapshot.val().dls)
+	$("#"+snapshot.key).find('.ups').html(snapshot.val().ups)
+    });
+
+database.ref('files/').on('child_removed', function(snapshot) {
+	  $("#"+snapshot.key).remove()
+    });
+
+// console.log(database)
+</script>
+
+</body>
+</html>
