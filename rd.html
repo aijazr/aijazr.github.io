@@ -1,19 +1,33 @@
 <html>
 <head> 
+	<style>
+table td {
+      text-align: center;
+    }
+
+ </style>
  </head>
  <body>  
- <div style="margin-left: 50px;" >
-<input style="margin-top: 50px;" type="text" id="filename" > 	<br>
-	<input style="margin-top: 5px;" type="text" id="status" >  <br>
+ <div >
+<div style="margin-right: 10px;text-align: center" > 
+ <input placeholder="time" style="margin-top: 5px;" type="text" id="time" >  <br>
+<input placeholder="filename"  style="margin-top: 5px;" type="text" id="filename" >  <br>
+<input placeholder="status"  style="margin-top: 5px;" type="text" id="status" >  <br>
+<input placeholder="dls"  style="margin-top: 5px;" type="text" id="dls" >  <br>
+<input placeholder="ups"  style="margin-top: 5px;" type="text" id="ups" >  <br>
+<div style="margin-top: 5px;"  >
 <input type="button" onclick="dosomething();"  value="submit">
- <input type="button" onclick="update();"  value="Update">
+ <input type="button"  value="Update">
  <input type="button" onclick="clean();"  value="Clean">
- 
-<table style="margin-top: 5px;" id="tab" border="1">
+ </div>
+</div>
+<table style="margin-top: 15px;"  id="tab" border="1">
   <thead>
-   <th>Key</th>
+   <th style="padding-left: 9px;" onclick="$('.date').toggle()"> Timestamp </th>
    <th>File Name</th>
    <th>Status</th>
+   <th>DLS</th>
+   <th>UPS</th>
   </thead>
   <tbody> 
 
@@ -39,7 +53,7 @@
   firebase.initializeApp(firebaseConfig);
 </script>  
  <script >
- 	
+ var stcolor = { Uploaded:"darkgreen", Uploading:"darkblue", Converting:"purple", Downloading:"black",Testing:"saddlebrown", DownloadFailed:"darkred",UploadFailed:"darkred",ConvertFailed:"darkred" }
 var database = firebase.database();
 var refer = database.ref('files/');
 var f = ""
@@ -72,22 +86,20 @@ database.ref('files/').set ({});
 
 
 // child_changed child_removed child_added
-refer.on('child_added', function(snapshot) {
-	// console.log(parentsnapshot)
-	// parentsnapshot.forEach(function(snapshot) {
-//   var childKey = childSnapshot.key;
-//   var childData = childSnapshot.val();
-   
-  //  (res).innerHTML += snapshot.key +" " +  JSON.stringify(snapshot.val() ) +"<br>"
-  var str = ` <tr>
-   <td> ${snapshot.key} </td>
-   <td> ${snapshot.val().filename} </td>
-   <td id="${snapshot.key}" > ${snapshot.val().status} </td>
+database.ref('files/').on('child_added', function(snapshot) {
+let status = snapshot.val().status
+let time =  new Date(parseInt(snapshot.key)).toLocaleTimeString("en-US")
+let str = ` <tr id="${snapshot.key}" >
+   <td class="key"><span class="time">${time}</span><br><span class="date">${snapshot.val().sno}</span></td>
+   <td class="filename">  ${snapshot.val().filename} </td>
+   <td class="status" style="color: ${stcolor[status]} ;" ><b>${status}</b></td>
+   <td class="dls" > ${snapshot.val().dls} </td>
+   <td class="ups" > ${snapshot.val().ups} </td>
   </tr> `
-  $("tbody").prepend(str)
+  $("tbody").append(str)
+  $(".date").hide()
     });
- //   });
-
+    
 database.ref('files/').on('child_changed', function(snapshot) {
 	console.log("changed",snapshot)
 	console.log(snapshot.key,snapshot.val())
