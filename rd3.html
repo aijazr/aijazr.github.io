@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <style>
+    body {
+
+      font-family: "Helvetica", sans-serif, Arial;
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Style inputs */
+    input[type=text],
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      margin-top: 6px;
+      resize: vertical;
+      border-radius: 5px;
+    }
+
+    textarea {
+      height: 140px;
+    }
+
+
+    input[type=text]:focus,
+    textarea:focus {
+      border-color: #0f5b79;
+      border-radius: 6px;
+      outline: 0 !important;
+
+    }
+
+    .btn {
+      background-color: #0e739b;
+      color: white;
+      padding: 9px 17px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      outline: 0 !important;
+
+      /* font-weight: bold; */
+      font-size: 14px;
+    }
+
+
+
+    .btn:hover {
+      background-color: #0f5b79;
+    }
+
+    .btn:disabled {
+      background-color: #0f5b79;
+      cursor: progress;
+    }
+
+    /* Create two columns that float next to eachother */
+    .column {
+      width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #checkurls {
+      margin-top: 30px;
+    }
+
+    table {
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      table-layout: fixed;
+      width: 100%;
+      font-size: 15px;
+    }
+
+    table td,
+    table th {
+     word-wrap: break-word;
+      border: 1px solid #ddd;
+      padding: 4px;
+    }
+
+    /* table tr:nth-child(even){background-color: #f2f2f2;} */
+
+    table th,.folder {
+      /* padding-top: 12px;
+  padding-bottom: 12px; */
+      text-align: left;
+      background-color: #0e739b;
+      color: white;
+    }
+
+
+    /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+
+      .column {
+        width: 100%;
+        margin-top: 0;
+      }
+    }
+
+    .right {
+      float: right;
+
+    }
+    .left {
+      float: left;
+
+    }
+
+    .divarea {
+      position: relative;
+    }
+
+    .showcount {
+      position: absolute;
+      top: 13px;
+      right: 7px;
+      color: #0f5b79;
+      font-size: 11px;
+      border-radius: 3px;
+      background-color: #f2f2f2;
+    }
+
+    
+    a {
+      text-decoration: none;
+      font-size: 15px;
+    }
+    .red {
+      color: darkred;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div style="color:#0f5b79;text-align:center">
+      <b><b onclick="pchanger(this)"> OTUS-FF-U2GD </b> / <b onclick="schanger(this)">ajzff</b></b>
+    </div>
+    <div class="row">
+      <div class="column">
+        <form id="myForm" autocomplete="off">
+          <div id="folderIdGet" style="margin-top: 5px;">
+              <input style="padding:9px;" type="text" id="gdfolder" placeholder="Folder (Default folder)">
+            </div>               
+            <div class="divarea">
+              <textarea id="urlBlock" class="textarea" onkeyup="getcount(this,'lk')" onpaste="getcount(this,'lk')" oncut="getcount(this,'lk')" placeholder="Enter File Url(s) separated by enter , space...."></textarea>
+              <b class="showcount"></b>
+              <div id="showcount2" style="font-size: 12px;color: #0E739B;margin-left: 5px"></div>
+            </div>
+            <div id="nmFld" style="display: none;" class="divarea">
+              <textarea class="textarea" onkeyup="getcount(this,'nm')" onpaste="getcount(this,'nm')" oncut="getcount(this,'nm')" placeholder="Enter File names(s) separated by enter or π.."></textarea>
+              <b class="showcount"></b>
+            </div>
+          
+
+          <div id="btndiv" style="margin-top:7px;">
+            <input class="btn" type="button" value="Check" id="btncheck" onclick="check(this)">
+            <span class="right">
+            	<input type="checkbox" style="display: none" id="nmCB">
+            	<input class="btn" style="padding: 4px;" type="button" onclick="clean();" value="Reset Tab">
+                   <input type="checkbox" id="insertCB">Insert
+            </span>
+            <input class="btn" type="submit" id="sbmt" value="Submit" onclick="insertChunk();return false;">
+              </div>
+        </form>
+        <br>
+   <div style="font-size: 12px;" id="checkurls"></div>     
+   <div id="result"></div>
+  <table>
+  <thead>
+  	
+   <tr><th style="width:80px;padding-left: 9px;" onclick="$('.date').toggle()"> Time </th>
+   <th>File Name</th>
+   <th style="width:80px">Status</th>
+   <th style="width:50px">DLS</th>
+   <th style="width:50px">UPS</th>
+  </tr></thead>
+  <tbody> 
+
+ <tr id="1593493518130">
+   <td class="key"><span class="time">10:35:18 AM</span><br><span class="date" style="display: none;">SN1_1593493518130<br>test</span></td>
+   <td class="filename">  1713.mp3 </td>
+   <td class="status" style="color: darkgreen ;"><b>Uploaded</b></td>
+   <td class="dls"> 1.31 MB </td>
+   <td class="ups"> 335.63 KB </td>
+  </tr>  <tr class="folder" id="1593493556668">
+    <td colspan="5" style="text-align:center;"><b> test - 1 links(s) ajzff/otus </b><span class="date" style="display: none;">10:35:56 AM<span> </span></span></td>
+    </tr>  <tr id="1593493556669">
+   <td class="key"><span class="time">10:35:56 AM</span><br><span class="date" style="display: none;">SN1_1593493556669<br>test</span></td>
+   <td class="filename">  198 - Succession.mp3 </td>
+   <td class="status" style="color: darkgreen ;"><b>Uploaded</b></td>
+   <td class="dls"> 12.03 MB </td>
+   <td class="ups"> 11.54 MB </td>
+  </tr>  <tr class="folder" id="1593493747316">
+    <td colspan="5" style="text-align:center;"><b> test - 1 links(s) ajzff/otus </b><span class="date" style="display: none;">10:39:07 AM<span> </span></span></td>
+    </tr>  <tr id="1593493747317">
+   <td class="key"><span class="time">10:39:07 AM</span><br><span class="date" style="display: none;">SN1_1593493747317<br>test</span></td>
+   <td class="filename">  198 - Succession.mp3 </td>
+   <td class="status" style="color: darkgreen ;"><b>Uploaded</b></td>
+   <td class="dls"> 12.03 MB </td>
+   <td class="ups"> 11.54 MB </td>
+  </tr> </tbody>
+ </table>
+ 
+        
+        
+      </div>
+    </div>
+  </div>
+  
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.4/firebase-database.js"></script>
+
+<script>	
+// Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyA8ouGGj6kQ-8iPulYkUmtouCiP3xazrG4",
+    authDomain: "ajz-heroku.firebaseapp.com",
+    databaseURL: "https://ajz-heroku.firebaseio.com",
+    projectId: "ajz-heroku",
+    storageBucket: "ajz-heroku.appspot.com",
+    messagingSenderId: "830685316269",
+    appId: "1:830685316269:web:2179a27640b20d0658b224"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig); 	
+var database = firebase.database();
+
+var stcolor = { Uploaded:"darkgreen", Uploading:"darkblue", Converting:"purple", Downloading:"black",Testing:"saddlebrown", DownloadFailed:"darkred",UploadFailed:"darkred",ConvertFailed:"darkred" }
+var parentFolderID = null;
+let p_arr =  ["otus","nak","nak2"]
+var param = "otus"
+var p = 0
+function pchanger($this){
+ p++
+ param= p_arr[p%3]
+$this.innerHTML = p_arr[p%3].toUpperCase()+"-FF-U2GD"
+}
+let s_arr =  ["ajzff","aijazr","aijaz","azmajz"]
+var site = "ajzff"
+var s = 0
+function schanger($this){
+ s++
+ site= s_arr[s%4]
+$this.innerHTML = s_arr[s%4]
+}
+function insertChunk(){
+var lkField = $("#urlBlock").val()
+var parentFolderName = $("#gdfolder").val();
+if (!/([^\s])/.test(parentFolderName) ) return false;
+if (!/([^\s])/.test(lkField) ) return false;
+var links = lkField.split(/[ ,\n]+/).filter(Boolean);
+if (insertCB.checked){
+	database.ref('files/'+Date.now()).set({folder: "Test",status:"links",links:"0 links(s) " + site +"/"+param});
+links.forEach(lk => {  
+    let timestamp = Date.now()
+    database.ref('files/'+timestamp).set ({
+	filename:lk,
+    status: "Testing",
+    dls :"NA",
+	ups : "NA"
+    }); // database.ref  
+}); // links.forEach
+}else{
+$.ajax({
+  method: "POST",
+  url: "https://"+site+".herokuapp.com/"+param,
+//  url: "http://localhost:5000/"+param,
+  data: {chunk: links,folder: parentFolderName,site}
+	}).done(function( res ) {
+		// console.log(res)
+		$("#urlBlock").attr("placeholder", "Enter File Url(s) separated by enter , space.... \n\n"+res.msg);
+  });
+}
+$("#urlBlock").val("")
+$(".showcount").html("sent")
+$("#showcount2").html("sent")
+$("#urlBlock").attr("placeholder", "Enter File Url(s) separated by enter , space....");
+}
+
+function clean(){
+database.ref('files/').set ({});
+}
+
+// child_changed child_removed child_added
+database.ref('files/').on('child_added', function(snapshot) {
+let status = snapshot.val().status
+let time =  new Date(parseInt(snapshot.key)).toLocaleTimeString("en-US")
+if(status=="links"){ 
+var str = ` <tr class="folder" id="${snapshot.key}" >
+    <td colspan="5" style="text-align:center;" ><b> ${snapshot.val().folder} - ${snapshot.val().links} </b><span class="date">${time}<span> </td>
+    </tr> `
+}else{	
+var str = ` <tr id="${snapshot.key}" >
+   <td class="key"><span class="time">${time}</span><br><span class="date">${snapshot.val().sno}<br>${snapshot.val().folder || "-"}</span></td>
+   <td class="filename">  ${snapshot.val().filename} </td>
+   <td class="status" style="color: ${stcolor[status]} ;" ><b>${status}</b></td>
+   <td class="dls" > ${snapshot.val().dls} </td>
+   <td class="ups" > ${snapshot.val().ups} </td>
+  </tr> `
+ } 
+  $("tbody").append(str)
+  $(".date").hide()
+    });
+ 
+
+database.ref('files/').on('child_changed', function(snapshot) {
+	let status = snapshot.val().status
+	 $("#"+snapshot.key).find('.status').html("<b>"+ status+"</b>" )
+	$("#"+snapshot.key).find('.status').css("color",stcolor[status])
+	$("#"+snapshot.key).find('.dls').html(snapshot.val().dls)
+	$("#"+snapshot.key).find('.filename').html(snapshot.val().filename)
+    if(status=="Uploaded"){
+   $("#"+snapshot.key).find('span.date').html(snapshot.val().sno+"<br>"+snapshot.val().folder)
+   $("#"+snapshot.key).find('.ups').html(snapshot.val().ups)
+  }
+    });
+
+database.ref('files/').on('child_removed', function(snapshot) {
+	  $("#"+snapshot.key).remove()
+    });
+    
+    
+    
+    // OLD SCRIPT ------------------------------------------
+  
+ 
+    function getcount($this, field) {
+      setTimeout(function () {
+        $this.nextElementSibling.innerText  = getcheck($this.value, "length", field)
+      },
+        10)
+    }
+
+    
+
+
+    function check($this) {
+      var urls = document.querySelector("#checkurls");
+      if ($this.value === "Check") {
+        $this.value = "Uncheck"
+        var textarea = document.querySelectorAll(".textarea");
+
+        var lkField = textarea[0].value;
+        var links = lkField.split(/[ ,\n]+/).filter(Boolean);
+        var nmField = textarea[1].value;
+        var names = nmField.split(/[π\n]+/).filter(Boolean);
+
+        urls.innerHTML = '';
+        var foldersID = document.querySelector("#gdfolder");
+        if (/([^\s])/.test(foldersID.value)) {
+          placeholder = foldersID.value;
+        } else {
+          placeholder = "UrlToGD";
+        }
+
+
+        if (nmCB.checked)
+          nmText = '| '+ names.length + ' names(s) '
+        else
+          nmText = ''
+
+        urls.innerHTML += '<b>Total ' + links.length + ' link(s) '+ nmText+ 'for ' + placeholder + '</b><br><hr>';
+        var i = 0
+        links.forEach(item => {
+          if (!nmCB.checked)
+            urls.innerHTML += item + "<BR>";
+          else
+            urls.innerHTML += (i+1)+') <b>'+names[i]+' </b> <br> '+ item + "<BR>";
+          i++
+        })
+        urls.innerHTML += "<BR>";
+
+
+      } else {
+        document.querySelector("#btncheck").value = "Check"
+        urls.innerHTML = "";
+      }
+    }
+
+
+    function getcheck($this, need, field) {
+      var string = $this;
+      if (field == "nm")
+        var urllinks = string.split(/[π\n]+/).filter(Boolean);
+      else
+        var urllinks = string.split(/[ ,\n]+/).filter(Boolean);
+      if (urllinks.length === 0) {
+      showcount2.innerText = ""
+        return ""
+      }
+      if (need == "length") {
+      	let len = urllinks.length
+        showcount2.innerText = len+" link(s)"
+        return len
+      }
+      
+    }
+    
+    
+    
+  </script>
+  
+</body>
+</html>
