@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <title>YouTube Uploader by Digital Inspiration</title>
+        <style>
+            div.error {
+                position: relative;
+                font-size: 0.9rem;
+                color: #ff4081;
+                -webkit-transform: translateY(0%);
+                -ms-transform: translateY(0%);
+                -o-transform: translateY(0%);
+                transform: translateY(0%);
+            }
+            .container {
+                max-width: 600px;
+            }
+        </style>
+    </head>
+    <body id="A<?= ScriptApp.getOAuthToken(); ?>">
+        <div class="container">
+            <div class="section">
+                <div class="row">
+                    <div class="col s12">
+                        <h4 class="center light-blue-text">YouTube Uploader</h4>
+                        <p class="center">Upload videos directly to our YouTube channel (<a href="http://bit.ly/YoutubeUploader" target="_blank" rel="noopener noreferrer">help</a>)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <form class="col s12" id="youtubeForm">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="video_title" name="Video Title" type="text" class="validate" data-error="#e1" required=""> <label for="video_title">Video Title</label>
+                            <div id="e1"></div>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="video_description" name="Video Description" type="text" class="validate" data-error="#e2" required=""> <label for="video_description">Video Description</label>
+                            <div id="e2"></div>
+                        </div>
+                        <div class="input-field col m6 s12">
+                            <select id="video_category" name="Video Category" data-error="#e3" required="">
+                                <option value="" data-error="#e4" disabled="disabled" selected="selected">Choose video category</option>
+                                <option value="1">Film &amp; Animation</option>
+                                <option value="2">Autos &amp; Vehicles</option>
+                                <option value="10">Music</option>
+                                <option value="15">Pets &amp; Animals</option>
+                                <option value="17">Sports</option>
+                                <option value="19">Travel &amp; Events</option>
+                                <option value="20">Gaming</option>
+                                <option value="22">People &amp; Blogs</option>
+                                <option value="23">Comedy</option>
+                                <option value="24">Entertainment</option>
+                                <option value="25">News &amp; Politics</option>
+                                <option value="26">Howto &amp; Style</option>
+                                <option value="27">Education</option>
+                                <option value="28">Science &amp; Technology</option>
+                                <option value="29">Nonprofits &amp; Activism</option>
+                            </select>
+                            <div id="e3"></div>
+                        </div>
+                        <div class="input-field col m6 s12">
+                            <select id="video_privacy" name="Video Privacy" data-error="#e4" required="">
+                                <option value="" disabled="disabled" selected="selected">Choose video privacy</option>
+                                <option value="public">Public</option>
+                                <option value="private">Private</option>
+                                <option value="unlisted">Unlisted</option>
+                            </select>
+                            <div id="e4"></div>
+                        </div>
+                        <div class="file-field input-field col s12">
+                            <div class="btn"><input id="file" name="Video File" type="file" data-error="#e5" accept="video/*" required=""> <span>Browse</span></div>
+                            <div class="file-path-wrapper"><input class="file-path validate" type="text" placeholder="Click to select a video file"></div>
+                            <div id="e5"></div>
+                        </div>
+                        <div class="input-field col m4 s12">
+                            <a href="#" id="btnUpload" onclick="run(); return false;" class="waves-effect waves-light btn-large">Upload Video</a> <button class="reset" style="display: none;" type="reset">Reset</button>
+                        </div>
+                        <div class="input-field col m8 s12">
+                            <p class="left-align">
+                                <span id="message"></span> <span id="progress" style="display: none;"><span id="percent-transferred"></span>% uploaded (<span id="bytes-transferred"></span>/<span id="total-bytes"></span> MB)</span>
+                            </p>
+                        </div>
+                    </div>
+                </form>
+                <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+                    <a class="btn-floating btn-large red" href="http://bit.ly/YoutubeUploader" target="_blank" title="YouTube Uploader Support"><i class="large material-icons">live_help</i></a>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
+        <script>
+            var n = function () {
+                (this.interval = 1e3), (this.maxInterval = 6e4);
+            };
+            (n.prototype.retry = function (t) {
+                setTimeout(t, this.interval), (this.interval = this.nextInterval_());
+            }),
+                (n.prototype.reset = function () {
+                    this.interval = 1e3;
+                }),
+                (n.prototype.nextInterval_ = function () {
+                    var t = 2 * this.interval + this.getRandomInt_(0, 1e3);
+                    return Math.min(t, this.maxInterval);
+                }),
+                (n.prototype.getRandomInt_ = function (t, e) {
+                    return Math.floor(Math.random() * (e - t + 1) + t);
+                });
+            var i = function (t) {
+                var e = function () {};
+                if (
+                    ((this.file = t.file),
+                    (this.contentType = t.contentType || this.file.type || "application/octet-stream"),
+                    (this.metadata = t.metadata || { title: this.file.name, mimeType: this.contentType }),
+                    (this.token = t.token),
+                    (this.onComplete = t.onComplete || e),
+                    (this.onProgress = t.onProgress || e),
+                    (this.onError = t.onError || e),
+                    (this.offset = t.offset || 0),
+                    (this.chunkSize = t.chunkSize || 0),
+                    (this.retryHandler = new n()),
+                    (this.url = t.url),
+                    !this.url)
+                ) {
+                    var o = t.params || {};
+                    (o.uploadType = "resumable"), (this.url = this.buildUrl_(t.fileId, o, t.baseUrl));
+                }
+                this.httpMethod = t.fileId ? "PUT" : "POST";
+            };
+            function s() {
+                return $("#video_title").val();
+            }
+            function a() {
+                return $("#video_description").val();
+            }
+            (i.prototype.upload = function () {
+                var t = new XMLHttpRequest();
+                t.open(this.httpMethod, this.url, !0),
+                    t.setRequestHeader("Authorization", "Bearer " + this.token),
+                    t.setRequestHeader("Content-Type", "application/json"),
+                    t.setRequestHeader("X-Upload-Content-Length", this.file.size),
+                    t.setRequestHeader("X-Upload-Content-Type", this.contentType),
+                    (t.onload = function (t) {
+                        if (t.target.status < 400) {
+                            var e = t.target.getResponseHeader("Location");
+                            (this.url = e), this.sendFile_();
+                        } else this.onUploadError_(t);
+                    }.bind(this)),
+                    (t.onerror = this.onUploadError_.bind(this)),
+                    t.send(JSON.stringify(this.metadata));
+            }),
+                (i.prototype.sendFile_ = function () {
+                    var t = this.file,
+                        e = this.file.size;
+                    (this.offset || this.chunkSize) && (this.chunkSize && (e = Math.min(this.offset + this.chunkSize, this.file.size)), (t = t.slice(this.offset, e)));
+                    var o = new XMLHttpRequest();
+                    o.open("PUT", this.url, !0),
+                        o.setRequestHeader("Content-Type", this.contentType),
+                        o.setRequestHeader("Content-Range", "bytes " + this.offset + "-" + (e - 1) + "/" + this.file.size),
+                        o.setRequestHeader("X-Upload-Content-Type", this.file.type),
+                        o.upload && o.upload.addEventListener("progress", this.onProgress),
+                        (o.onload = this.onContentUploadSuccess_.bind(this)),
+                        (o.onerror = this.onContentUploadError_.bind(this)),
+                        o.send(t);
+                }),
+                (i.prototype.resume_ = function () {
+                    var t = new XMLHttpRequest();
+                    t.open("PUT", this.url, !0),
+                        t.setRequestHeader("Content-Range", "bytes */" + this.file.size),
+                        t.setRequestHeader("X-Upload-Content-Type", this.file.type),
+                        t.upload && t.upload.addEventListener("progress", this.onProgress),
+                        (t.onload = this.onContentUploadSuccess_.bind(this)),
+                        (t.onerror = this.onContentUploadError_.bind(this)),
+                        t.send();
+                }),
+                (i.prototype.extractRange_ = function (t) {
+                    var e = t.getResponseHeader("Range");
+                    e && (this.offset = parseInt(e.match(/\d+/g).pop(), 10) + 1);
+                }),
+                (i.prototype.onContentUploadSuccess_ = function (t) {
+                    200 == t.target.status || 201 == t.target.status
+                        ? this.onComplete(t.target.response)
+                        : 308 == t.target.status
+                        ? (this.extractRange_(t.target), this.retryHandler.reset(), this.sendFile_())
+                        : this.onContentUploadError_(t);
+                }),
+                (i.prototype.onContentUploadError_ = function (t) {
+                    t.target.status && t.target.status < 500 ? this.onError(t.target.response) : this.retryHandler.retry(this.resume_.bind(this));
+                }),
+                (i.prototype.onUploadError_ = function (t) {
+                    this.onError(t.target.response);
+                }),
+                (i.prototype.buildQuery_ = function (t) {
+                    return (
+                        (t = t || {}),
+                        Object.keys(t)
+                            .map(function (e) {
+                                return encodeURIComponent(e) + "=" + encodeURIComponent(t[e]);
+                            })
+                            .join("&")
+                    );
+                }),
+                (i.prototype.buildUrl_ = function (t, e, o) {
+                    var n = o;
+                    t && (n += t);
+                    var i = this.buildQuery_(e);
+                    return i && (n += "?" + i), n;
+                });
+            var d,
+                l,
+                t,
+                o,
+                e,
+                r = function () {
+                    (this.videoId = ""), (this.uploadStartTime = 0);
+                };
+            function p(t, e) {
+                d.html(e || ""), t ? ($("button.reset").click(), o.removeClass("disabled"), l.hide()) : o.addClass("disabled");
+            }
+            function run() {
+                e.valid()
+                    ? (p(!1), new r().uploadFile($("#file").get(0).files[0]))
+                    : window.setTimeout(function () {
+                          t.resetForm();
+                      }, 5e3);
+            }
+            (r.prototype.uploadFile = function (t) {
+                var e = !1,
+                    o = { snippet: { title: s(), description: a(), categoryId: $("#video_category").val() }, status: { privacyStatus: $("#video_privacy").val() } },
+                    n = new i({
+                        baseUrl: "https://www.googleapis.com/upload/youtube/v3/videos",
+                        file: t,
+                        token: $("body").attr("id").substr(1),
+                        metadata: o,
+                        params: { part: Object.keys(o).join(",") },
+                        onError: function (t) {
+                            var e = t;
+                            try {
+                                e = JSON.parse(t).error.message;
+                            } finally {
+                                p(!0, e);
+                            }
+                        }.bind(this),
+                        onProgress: function (t) {
+                            var o = t.loaded,
+                                n = t.total,
+                                i = (100 * o) / n;
+                            $("#percent-transferred").text(i.toFixed(2)),
+                                $("#bytes-transferred").text((o / 1048576).toFixed(3)),
+                                $("#total-bytes").text((n / 1048576).toFixed(3)),
+                                e || ((e = !0), l.show()),
+                                100 === i && (l.hide(), d.html("Video uploaded, processing.."));
+                        }.bind(this),
+                        onComplete: function (t) {
+                            var e = JSON.parse(t);
+                            (this.videoId = e.id),
+                                google.script.run.doGet({ upload: !0, id: this.videoId, title: s(), text: a() }),
+                                setTimeout(function () {
+                                    p(!0, "Video uploaded successfully! (<a target='_blank' href='https://youtu.be/ID'>Watch on YouTube</a>)".replace("ID", e.id));
+                                }, 8e3);
+                        }.bind(this),
+                    });
+                (this.uploadStartTime = Date.now()), n.upload();
+            }),
+                $(document).ready(function () {
+                    $.validator.setDefaults({ ignore: [] }),
+                        $("select").formSelect(),
+                        (d = $("#message")),
+                        (l = $("#progress")),
+                        (o = $("#btnUpload")),
+                        (e = $("form")),
+                        (t = e.validate({
+                            errorElement: "div",
+                            errorPlacement: function (t, e) {
+                                var o = $(e).data("error");
+                                o ? $(o).append(t) : t.insertAfter(e);
+                            },
+                        }));
+                });
+        </script>
+        
+</body>
+</html>
