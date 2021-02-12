@@ -114,17 +114,23 @@
     }
     $(document).ready(function() {
 
+  var token = prompt("Please enter passtoken");
+  
       $.ajax({
         type: "get",
         crossDomain: true,
-        url: "https://script.google.com/macros/s/AKfycbxsLpIMyQPNPkaP3Ubm80xI_ikj2VWdcwTQIQvaZ7rx5ZbfPiNf/exec",
+        url: "https://script.google.com/macros/s/AKfycbxsLpIMyQPNPkaP3Ubm80xI_ikj2VWdcwTQIQvaZ7rx5ZbfPiNf/exec?token=token",
         dataType: "jsonp",
         success: function (response) {
-          response.forEach(e=> {
+        if(response.status){ 
+          response.data.forEach(e=> {
             $('#first-a').after('<a onclick="loadPage(this.className)"  class="'+e.link+'" href="#">'+e.name+'</a>');
           });
-          console.log(response)
-          $('#img-loader').remove();
+               $('#img-loader').remove();
+                 }else{
+            	alert(response.msg)
+            }
+            console.log(response.msg)
         }
       });
       // console.log(response)
