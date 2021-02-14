@@ -124,7 +124,7 @@
         success: function (response) {
         if(response.status){ 
           response.data.forEach(e=> {
-            $('#first-a').after('<a onclick="loadPage(this.className)"  class="'+e.link+'" href="#">'+e.name+'</a>');
+            $('#first-a').after('<a onclick="loadPage(this.className)"  class="'+e.link+'" href="'+e.link+'">'+e.name+'</a>');
           });
                $('#img-loader').remove();
                  }else{
